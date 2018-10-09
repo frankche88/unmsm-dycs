@@ -17,7 +17,7 @@ public class OrderService {
 
   public Order create(Order order) {
 
-    order.setCreatedAt(new Date());
+    order.setOrderDate(new Date());
     return dao.create(order);
   }
 

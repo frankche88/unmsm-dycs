@@ -22,13 +22,15 @@ public class OrderJdbiRepository implements OrderRepository {
 public Order create(Order order) {
     jdbi.inTransaction(handle -> {
       String insert = "INSERT " +
-        "INTO orders (created_at, amount, customer_id, delivery_address_id) " +
-        "VALUES (:created_at, :amount, :customer_id, :delivery_address_id);";
+        "INTO orders (order_id, address, order_date, order_status, payment_authcode, order_total) " +
+        "VALUES (:order_id, :address, :order_date, :order_status, :payment_authcode, :order_total);";
       return handle.createUpdate(insert)
-        .bind("created_at", order.getCreatedAt())
-        .bind("amount", order.getAmount())
-        .bind("customer_id", order.getCustomerId())
-        .bind("delivery_address_id", order.getDeliveryAddressId())
+    	.bind("order_id", order.getOrderId())
+        .bind("address", order.getAddress())
+        .bind("order_date", order.getOrderDate())
+        .bind("order_status", order.getOrderStatus().ordinal())
+        .bind("payment_authcode", order.getPaymentAuthCode())
+        .bind("order_total", order.getOrderTotal())
         .execute();
     });
 
@@ -41,7 +43,7 @@ public Order create(Order order) {
 @Override
 public Optional<Order> find(Long id) {
     return jdbi.withHandle(handle ->
-      handle.createQuery("SELECT * from orders where id=:id")
+      handle.createQuery("SELECT * from orders where order_id=:id")
         .bind("id", id)
         .map(new OrderMapper())
         .findFirst());
@@ -53,7 +55,7 @@ public Optional<Order> find(Long id) {
 @Override
 public void delete(Long id) {
     jdbi.inTransaction(handle -> {
-      String delete = "DELETE FROM orders where id=:id";
+      String delete = "DELETE FROM orders where order_id=:id";
       return handle.createUpdate(delete)
         .bind("id", id)
         .execute();
@@ -66,7 +68,7 @@ public void delete(Long id) {
 @Override
 public List<Order> findByCustomer(Long id) {
     return jdbi.withHandle(handle ->
-      handle.createQuery("SELECT * from orders where customer_id=:id")
+      handle.createQuery("SELECT * from orders where buyer_id=:id")
         .bind("id", id)
         .map(new OrderMapper())
         .list());

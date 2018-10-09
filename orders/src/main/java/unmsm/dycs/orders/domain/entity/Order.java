@@ -1,52 +1,96 @@
 package unmsm.dycs.orders.domain.entity;
 
 import java.math.BigDecimal;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
+
+import unmsm.dycs.commons.domain.enumeration.OrderStatus;
+import unmsm.dycs.orders.application.dto.OrderItemDto;
 
 public class Order {
-  private Long id;
-  private Date createdAt;
-  private BigDecimal amount;
-  private Long customerId;
-  private Long deliveryAddressId;
+	
+	private long orderId;
 
-  public Long getId() {
-    return id;
-  }
+	private String address;
 
-  public void setId(Long id) {
-    this.id = id;
-  }
+	private Date orderDate;
 
-  public Date getCreatedAt() {
-    return createdAt;
-  }
+	private OrderStatus orderStatus;
+	
+	private String paymentAuthCode;
+	
+	private BigDecimal orderTotal;
+	
+	private Buyer buyer;
+	
+	private List<OrderItemDto> orderItems = new ArrayList<>();
 
-  public void setCreatedAt(Date createdAt) {
-    this.createdAt = createdAt;
-  }
+	public long getOrderId() {
+		return orderId;
+	}
 
-  public BigDecimal getAmount() {
-    return amount;
-  }
+	public void setOrderId(long orderId) {
+		this.orderId = orderId;
+	}
 
-  public void setAmount(BigDecimal amount) {
-    this.amount = amount;
-  }
+	public String getAddress() {
+		return address;
+	}
 
-  public Long getCustomerId() {
-    return customerId;
-  }
+	public void setAddress(String address) {
+		this.address = address;
+	}
 
-  public void setCustomerId(Long customerId) {
-    this.customerId = customerId;
-  }
+	public Date getOrderDate() {
+		return orderDate;
+	}
 
-  public Long getDeliveryAddressId() {
-    return deliveryAddressId;
-  }
+	public void setOrderDate(Date orderDate) {
+		this.orderDate = orderDate;
+	}
 
-  public void setDeliveryAddressId(Long deliveryAddressId) {
-    this.deliveryAddressId = deliveryAddressId;
-  }
+	public OrderStatus getOrderStatus() {
+		return orderStatus;
+	}
+
+	public void setOrderStatus(OrderStatus orderStatus) {
+		this.orderStatus = orderStatus;
+	}
+
+	public String getPaymentAuthCode() {
+		return paymentAuthCode;
+	}
+
+	public void setPaymentAuthCode(String paymentAuthCode) {
+		this.paymentAuthCode = paymentAuthCode;
+	}
+
+	public BigDecimal getOrderTotal() {
+		return orderTotal;
+	}
+
+	public void setOrderTotal(BigDecimal orderTotal) {
+		this.orderTotal = orderTotal;
+	}
+
+	public Buyer getBuyer() {
+		return buyer;
+	}
+
+	public void setBuyer(Buyer buyer) {
+		this.buyer = buyer;
+	}
+
+	public List<OrderItemDto> getOrderItems() {
+		return orderItems;
+	}
+
+	public void setOrderItems(List<OrderItemDto> orderItems) {
+		this.orderItems = orderItems;
+	}
+	
+	
+
+  
 }
