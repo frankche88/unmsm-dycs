@@ -1,4 +1,4 @@
-package unmsm.dycs.orders.infrastructure.persistence.jdbi.repository;
+package unmsm.dycs.orders.infrastructure.persistence.jdbi.mapper;
 
 import org.jdbi.v3.core.mapper.RowMapper;
 import org.jdbi.v3.core.statement.StatementContext;

@@ -4,6 +4,7 @@ import org.jdbi.v3.core.Jdbi;
 
 import unmsm.dycs.orders.domain.entity.Order;
 import unmsm.dycs.orders.domain.repository.OrderRepository;
+import unmsm.dycs.orders.infrastructure.persistence.jdbi.mapper.OrderMapper;
 
 import java.util.List;
 import java.util.Optional;

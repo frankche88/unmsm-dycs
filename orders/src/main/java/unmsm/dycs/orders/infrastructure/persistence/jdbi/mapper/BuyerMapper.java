@@ -1,4 +1,4 @@
-package unmsm.dycs.orders.infrastructure.persistence.jdbi.repository;
+package unmsm.dycs.orders.infrastructure.persistence.jdbi.mapper;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
