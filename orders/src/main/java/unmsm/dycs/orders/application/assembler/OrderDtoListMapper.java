@@ -2,16 +2,15 @@ package unmsm.dycs.orders.application.assembler;
 
 import org.modelmapper.PropertyMap;
 
-import unmsm.dycs.commons.domain.valueobject.Money;
 import unmsm.dycs.orders.application.dto.OrderDto;
 import unmsm.dycs.orders.domain.entity.Order;
 
-public class OrderCreateMapper extends PropertyMap<OrderDto, Order> {
+public class OrderDtoListMapper extends PropertyMap<Order, OrderDto> {
 
         @Override
         protected void configure() {
 
-            map().setOrderTotal(Money.soles(source.getOrderTotal()));
+            map().setOrderTotal(source.getOrderTotal().getAmount());
             
         }
 
