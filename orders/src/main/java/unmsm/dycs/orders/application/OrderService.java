@@ -3,29 +3,31 @@ package unmsm.dycs.orders.application;
 import java.util.Date;
 import java.util.List;
 
+import javax.inject.Inject;
+
 import unmsm.dycs.orders.domain.entity.Order;
 import unmsm.dycs.orders.domain.repository.OrderRepository;
 
 public class OrderService {
 
-  
-  private final OrderRepository dao;
+    private final OrderRepository repository;
+    
+    @Inject
+    public OrderService(OrderRepository dao) {
+        this.repository = dao;
+    }
 
-  public OrderService(OrderRepository dao) {
-    this.dao = dao;
-  }
+    public Order create(Order order) {
 
-  public Order create(Order order) {
+        order.setOrderDate(new Date());
+        return repository.create(order);
+    }
 
-    order.setOrderDate(new Date());
-    return dao.create(order);
-  }
+    public List<Order> ordersByBuyer(Long id) {
+        return repository.findByBuyer(id);
+    }
 
-  public List<Order> ordersByCustomer(Long id) {
-    return dao.findByBuyer(id);
-  }
-
-  public void delete(Long id) {
-    dao.delete(id);
-  }
+    public void delete(Long id) {
+        repository.delete(id);
+    }
 }

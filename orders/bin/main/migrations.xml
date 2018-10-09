@@ -4,115 +4,34 @@
 	xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
-         http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd">
+         http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.0.xsd">
 
-	<changeSet id="1" author="frank.che88">
+	<changeSet id="1" author="frankche88">
 
-		<createTable tableName="orders">
+		<sqlFile dbms="h2" encoding="utf8" endDelimiter=";"
+			path="migrations/h2/1_BuyersTable.sql"
+			relativeToChangelogFile="true" splitStatements="true"
+			stripComments="true" />
 
-			<column name="order_id" type="INT UNSIGNED" autoIncrement="true">
-				<constraints primaryKey="true" nullable="false" />
-			</column>
-
-			<column name="address" type="string">
-				<constraints nullable="false" />
-			</column>
-
-			<column name="order_date" type="timestamp">
-				<constraints nullable="false" />
-			</column>
-
-			<column name="order_status" type="INT UNSIGNED">
-				<constraints nullable="false" />
-			</column>
-
-			<column name="payment_authcode" type="string">
-				<constraints nullable="true" />
-			</column>
-
-			<column name="order_total" type="decimal">
-				<constraints nullable="false" />
-			</column>
-
-		</createTable>
-
-		<createTable tableName="buyers">
-
-			<column name="buyer_id" type="INT UNSIGNED" autoIncrement="true">
-				<constraints primaryKey="true" nullable="false" />
-			</column>
-
-			<column name="order_id" type="INT UNSIGNED">
-				<constraints primaryKey="true" nullable="false" />
-			</column>
-
-			<column name="user_name" type="string">
-				<constraints nullable="false" />
-			</column>
-
-			<column name="first_name" type="string">
-				<constraints nullable="false" />
-			</column>
-
-			<column name="last_name" type="string">
-				<constraints nullable="false" />
-			</column>
-
-		</createTable>
-
-		<createTable tableName="order_items">
-
-			<column name="id" type="INT UNSIGNED" autoIncrement="true">
-				<constraints primaryKey="true" nullable="false" />
-			</column>
-
-			<column name="order_id" type="INT UNSIGNED">
-				<constraints primaryKey="true" nullable="false" />
-			</column>
-
-			<column name="product_id" type="INT UNSIGNED">
-				<constraints nullable="false" />
-			</column>
-
-			<column name="product_name" type="string">
-				<constraints nullable="false" />
-			</column>
-
-			<column name="picture_url" type="string">
-				<constraints nullable="false" />
-			</column>
-
-			<column name="unit_price" type="decimal">
-				<constraints nullable="false" />
-			</column>
-
-			<column name="units" type="INT UNSIGNED">
-				<constraints nullable="false" />
-			</column>
-
-		</createTable>
-		
-		    <addForeignKeyConstraint baseColumnNames="order_id"
-            baseTableName="order_items"
-            constraintName="fk_item_order"
-            deferrable="true"
-            initiallyDeferred="true"
-            onDelete="CASCADE"
-            onUpdate="RESTRICT"
-            referencedColumnNames="order_id"
-            referencedTableName="orders"/>
-		
-		    <addForeignKeyConstraint baseColumnNames="order_id"
-            baseTableName="buyers"
-            constraintName="fk_buyer_order"
-            deferrable="true"
-            initiallyDeferred="true"
-            onDelete="CASCADE"
-            onUpdate="RESTRICT"
-            referencedColumnNames="order_id"
-            referencedTableName="orders"/>
-		
 	</changeSet>
+
+	<changeSet id="2" author="frankche88">
+
+		<sqlFile dbms="h2" encoding="utf8" endDelimiter=";"
+			path="migrations/h2/2_OrdersTable.sql"
+			relativeToChangelogFile="true" splitStatements="true"
+			stripComments="true" />
+
+	</changeSet>
+
+	<changeSet id="3" author="frankche88">
+
+		<sqlFile dbms="h2" encoding="utf8" endDelimiter=";"
+			path="migrations/h2/4_OrderItemsTable.sql"
+			relativeToChangelogFile="true" splitStatements="true"
+			stripComments="true" />
+
+	</changeSet>
+
+
 </databaseChangeLog>
-
-

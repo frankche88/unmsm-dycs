@@ -1,18 +1,18 @@
 package unmsm.dycs.orders.application;
 
-public class InvalidCustomerException extends RuntimeException {
+public class InvalidOrderException extends RuntimeException {
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = -6000960757799888336L;
 	private final String customerId;
 
-	public InvalidCustomerException(String message, String customerId) {
+	public InvalidOrderException(String message, String customerId) {
 		super(message);
 		this.customerId = customerId;
 	}
 
-	public String getCustomerId() {
+	public String getOrderId() {
 		return customerId;
 	}
 }
