@@ -42,7 +42,7 @@ public class App extends Application<AppConfiguration> {
         // register hbn bundle before guice to make sure factory initialized before guice context start
         bootstrap.addBundle(hibernate);
         bootstrap.addBundle(GuiceBundle.builder()
-                .enableAutoConfig("app")
+                .enableAutoConfig("unmsm.dycs")
                 .modules(new HbnModule(hibernate))
                 .build());
 

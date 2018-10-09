@@ -5,26 +5,27 @@ server:
   adminConnectors:
   - type: http
     port: 9001
-
-
-customersServiceBaseUrl: ${CLIENTES_BASEURL:-http://localhost:8080/}
-customersServiceUsername: domix
-customersServicePassword: secreto
-
-
-securityServiceBaseUrl: ${SECURITY_BASEURL:-http://localhost:8090/}
+swagger:
+  resourcePackage: unmsm.dycs.orders.application.controllers
+  schemes:
+    - http
 database:
-  # the name of your JDBC driver
-  driverClass: org.postgresql.Driver
   # the username
-  user: order_user
+  user: ${DB_USERNAME}
   # the password
-  password: orders
+  password: ${DB_PASSWORD}
+  # the name of your JDBC driver
+  driverClass: ${JDBC_DRIVER}
   # the JDBC URL
-  url: jdbc:postgresql://${DATABASE_HOST:-localhost}/orders
+  url: ${JDBC_URL}
   # any properties specific to your JDBC driver:
   properties:
     charSet: UTF-8
+    #hibernate.dialect: org.hibernate.dialect.H2Dialect
+    hibernate.show_sql: true
+    org.hibernate.type: true
+    hibernate.generate_statistics: false
+    hibernate.hbm2ddl.auto: validate
   # the maximum amount of time to wait on an empty pool before throwing an exception
   maxWaitForConnection: 1s
   # the SQL query to run when validating a connection's liveness
@@ -41,18 +42,3 @@ database:
   evictionInterval: 10s
   # the minimum amount of time an connection must sit idle in the pool before it is eligible for eviction
   minIdleTime: 1 minute
-
-
-zipkin:
-  enabled: true
-  collector: http
-  baseUrl: http://zipkin:9411/
-  serviceHost: orders
-  servicePort: 9000
-  serviceName: orders
-  connectTimeout: 10s
-  readTimeout: 60s
-
-zipkinClient:
-  serviceName: orders
-  timeout: 2s
