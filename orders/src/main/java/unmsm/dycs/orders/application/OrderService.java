@@ -22,7 +22,7 @@ public class OrderService {
   }
 
   public List<Order> ordersByCustomer(Long id) {
-    return dao.findByCustomer(id);
+    return dao.findByBuyer(id);
   }
 
   public void delete(Long id) {

@@ -67,7 +67,7 @@ public void delete(Long id) {
  * @see unmsm.dycs.orders.infrastructure.persistence.jdbi.OrderRepository#findByCustomer(java.lang.Long)
  */
 @Override
-public List<Order> findByCustomer(Long id) {
+public List<Order> findByBuyer(Long id) {
     return jdbi.withHandle(handle ->
       handle.createQuery("SELECT * from orders where buyer_id=:id")
         .bind("id", id)

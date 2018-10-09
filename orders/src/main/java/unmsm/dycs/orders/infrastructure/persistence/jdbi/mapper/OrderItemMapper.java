@@ -3,7 +3,9 @@ package unmsm.dycs.orders.infrastructure.persistence.jdbi.mapper;
 import org.jdbi.v3.core.mapper.RowMapper;
 import org.jdbi.v3.core.statement.StatementContext;
 
+import unmsm.dycs.commons.domain.enumeration.Currency;
 import unmsm.dycs.commons.domain.enumeration.OrderStatus;
+import unmsm.dycs.commons.domain.valueobject.Money;
 import unmsm.dycs.orders.domain.entity.Order;
 
 import java.sql.ResultSet;
@@ -24,7 +26,7 @@ public class OrderItemMapper implements RowMapper<Order> {
 
     result.setPaymentAuthCode(rs.getString("payment_authcode"));
     
-    result.setOrderTotal(rs.getBigDecimal("order_total"));
+    result.setOrderTotal(new Money(rs.getBigDecimal("order_total"), Currency.PEN));
     
     
     return result;

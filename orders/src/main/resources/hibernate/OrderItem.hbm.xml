@@ -1,0 +1,33 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+    
+    <class name="unmsm.dycs.orders.domain.entity.OrderItem" table="order_items">
+        
+        <id name="id" type="long" >
+            <column name="id" not-null="true"/>
+        </id>
+
+        <property name="orderId" type="order_id"/>
+        
+        <property name="productId" type="product_id"/>
+        
+        <property name="productName" type="product_name"/>
+        
+        <property name="pictureUrl" type="picture_url"/>
+        
+        <component name="unitPrice" class="unmsm.dycs.commons.domain.valueobject.Money">
+            <property name="amount" column="unit_price" />
+            <property name="currency" column="currency">
+                <type name="org.hibernate.type.EnumType">
+                    <param name="enumClass">unmsm.dycs.commons.domain.enumeration.Currency</param>
+                    <param name="useNamed">true</param>
+                </type>
+            </property>
+        </component>
+        
+        <property name="units" type="units"/>
+        
+    </class>
+</hibernate-mapping>

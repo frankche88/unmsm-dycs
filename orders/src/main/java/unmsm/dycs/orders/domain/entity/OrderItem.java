@@ -1,6 +1,6 @@
 package unmsm.dycs.orders.domain.entity;
 
-import java.math.BigDecimal;
+import unmsm.dycs.commons.domain.valueobject.Money;
 
 public class OrderItem {
 	
@@ -14,7 +14,7 @@ public class OrderItem {
 	
 	private String pictureUrl;
 	
-	private BigDecimal unitPrice;
+	private Money unitPrice;
 
 	private int units;
 
@@ -50,11 +50,11 @@ public class OrderItem {
 		this.pictureUrl = pictureUrl;
 	}
 
-	public BigDecimal getUnitPrice() {
+	public Money getUnitPrice() {
 		return unitPrice;
 	}
 
-	public void setUnitPrice(BigDecimal unitPrice) {
+	public void setUnitPrice(Money unitPrice) {
 		this.unitPrice = unitPrice;
 	}
 

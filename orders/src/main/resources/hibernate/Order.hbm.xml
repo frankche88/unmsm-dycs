@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+        "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+        "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping
+	package="unmsm.dycs.orders.domain.entity">
+
+	<class name="Order" table="orders">
+
+		<id name="orderId" column="order_id">
+			<generator class="native" />
+		</id>
+
+		<property name="address" column="address" />
+
+		<property name="orderDate" column="order_date" />
+
+		<property name="orderStatus" column="order_status" />
+
+		<property name="paymentAuthCode" column="payment_authcode" />
+
+		<component name="orderTotal"
+			class="unmsm.dycs.commons.domain.valueobject.Money">
+			<property name="amount" column="order_total" />
+			<property name="currency" column="currency">
+				<type name="org.hibernate.type.EnumType">
+					<param name="enumClass">unmsm.dycs.commons.domain.enumeration.Currency</param>
+					<param name="useNamed">true</param>
+				</type>
+			</property>
+		</component>
+
+		<many-to-one name="buyer"
+			class="unmsm.dycs.orders.domain.entity.Buyer" column="buyer_id"
+			not-null="true" />
+
+
+		<set name="orderItems" table="order_items" inverse="true"
+			cascade="save-update" lazy="true" fetch="select">
+
+			<key>
+				<column name="order_id" not-null="true" />
+			</key>
+
+			<one-to-many
+				class="unmsm.dycs.orders.domain.entity.OrderItem" />
+
+		</set>
+
+
+
+
+	</class>
+</hibernate-mapping>

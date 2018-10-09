@@ -11,8 +11,9 @@ public class OrderHibernateRepository extends BaseHibernateRepository<Order> imp
 
     @Override
     public Order create(Order order) {
-        // TODO Auto-generated method stub
-        return null;
+
+        this.persist(order);
+        return order;
     }
 
     @Override
@@ -23,12 +24,14 @@ public class OrderHibernateRepository extends BaseHibernateRepository<Order> imp
 
     @Override
     public void delete(Long id) {
-        // TODO Auto-generated method stub
-        
+        Order order = new Order();
+        order.setOrderId(id);
+        this.getSession().delete(order);
+
     }
 
     @Override
-    public List<Order> findByCustomer(Long id) {
+    public List<Order> findByBuyer(Long id) {
         // TODO Auto-generated method stub
         return null;
     }

@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+        "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+        "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping package="unmsm.dycs.orders.domain.entity">
+	
+	<class name="Buyer" table="buyers">
+	
+        <id name="buyerId" column="buyer_id">
+            <generator class="native"/>
+        </id>
+        
+        <property name="userName" column="user_name" />
+        
+        <property name="firstName" column="first_name" />
+        
+        <property name="lastName" column="last_name" />
+        
+    </class> 
+</hibernate-mapping>

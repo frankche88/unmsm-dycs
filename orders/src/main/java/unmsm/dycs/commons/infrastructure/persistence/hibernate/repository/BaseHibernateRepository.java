@@ -6,6 +6,8 @@ import javax.inject.Named;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 
+import unmsm.dycs.commons.domain.repository.BaseRepository;
+
 @Named
 public class BaseHibernateRepository<T> implements BaseRepository<T> {
 

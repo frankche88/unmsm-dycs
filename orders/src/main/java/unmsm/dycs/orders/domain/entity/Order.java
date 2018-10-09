@@ -1,12 +1,11 @@
 package unmsm.dycs.orders.domain.entity;
 
-import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
 import unmsm.dycs.commons.domain.enumeration.OrderStatus;
-import unmsm.dycs.orders.application.dto.OrderItemDto;
+import unmsm.dycs.commons.domain.valueobject.Money;
 
 public class Order {
 	
@@ -20,11 +19,11 @@ public class Order {
 	
 	private String paymentAuthCode;
 	
-	private BigDecimal orderTotal;
+	private Money orderTotal;
 	
 	private Buyer buyer;
 	
-	private List<OrderItemDto> orderItems = new ArrayList<>();
+	private List<OrderItem> orderItems = new ArrayList<>();
 
 	public long getOrderId() {
 		return orderId;
@@ -66,11 +65,11 @@ public class Order {
 		this.paymentAuthCode = paymentAuthCode;
 	}
 
-	public BigDecimal getOrderTotal() {
+	public Money getOrderTotal() {
 		return orderTotal;
 	}
 
-	public void setOrderTotal(BigDecimal orderTotal) {
+	public void setOrderTotal(Money orderTotal) {
 		this.orderTotal = orderTotal;
 	}
 
@@ -82,11 +81,11 @@ public class Order {
 		this.buyer = buyer;
 	}
 
-	public List<OrderItemDto> getOrderItems() {
+	public List<OrderItem> getOrderItems() {
 		return orderItems;
 	}
 
-	public void setOrderItems(List<OrderItemDto> orderItems) {
+	public void setOrderItems(List<OrderItem> orderItems) {
 		this.orderItems = orderItems;
 	}
 	
