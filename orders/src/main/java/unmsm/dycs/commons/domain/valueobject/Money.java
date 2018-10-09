@@ -37,11 +37,11 @@ public class Money {
         return new Money(amount, Currency.EUR);
     }
 
-    private void setAmount(BigDecimal amount) {
+    protected void setAmount(BigDecimal amount) {
         this.amount = amount;
     }
 
-    private void setCurrency(Currency currency) {
+    protected void setCurrency(Currency currency) {
         this.currency = currency;
     }
 

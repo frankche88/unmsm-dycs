@@ -30,7 +30,7 @@ public class App extends Application<AppConfiguration> {
         });
 
         bootstrap.setConfigurationSourceProvider(new SubstitutingSourceProvider(
-                bootstrap.getConfigurationSourceProvider(), new EnvironmentVariableSubstitutor(false)));
+                bootstrap.getConfigurationSourceProvider(), new EnvironmentVariableSubstitutor()));
         
         bootstrap.addBundle(new SwitchableSwaggerBundle());
         

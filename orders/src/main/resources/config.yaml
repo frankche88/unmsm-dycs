@@ -5,10 +5,12 @@ server:
   adminConnectors:
   - type: http
     port: 9001
+#,app.movies.api.controller,banking.oauth.api.controller
 swagger:
-  resourcePackage: unmsm.dycs.orders.application.controllers
+  resourcePackage: unmsm.dycs.orders.application.controllers 
   schemes:
     - http
+
 database:
   # the username
   user: ${DB_USERNAME}

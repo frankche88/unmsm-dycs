@@ -27,6 +27,8 @@ public class AppConfiguration extends Configuration {
 
     @JsonProperty("swagger")
     private SwaggerBundleConfiguration swaggerBundleConfiguration;
+    
+
 
     public SwaggerBundleConfiguration getSwaggerBundleConfiguration() {
         return swaggerBundleConfiguration;

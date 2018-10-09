@@ -45,7 +45,7 @@ public class OrderHibernateRepository extends BaseHibernateRepository<Order> imp
         
         criteria.select( orderRoot );
         
-        criteria.where( builder.equal( orderRoot.get("buyerId" ), id ) );
+        criteria.where( builder.equal( orderRoot.get("buyer").get("buyerId" ), id ) );
         
         List<Order> orders = this.getSession().createQuery( criteria ).getResultList();
 

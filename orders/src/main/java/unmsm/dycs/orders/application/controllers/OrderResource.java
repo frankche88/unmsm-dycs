@@ -15,12 +15,14 @@ import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.MediaType;
 
 import io.dropwizard.hibernate.UnitOfWork;
+import io.swagger.annotations.Api;
 import unmsm.dycs.orders.application.OrderService;
 import unmsm.dycs.orders.domain.entity.Order;
 
 @RolesAllowed("ADMIN")
 @Path("/v1/orders")
 @Produces(MediaType.APPLICATION_JSON)
+@Api(value = "v1/orders")
 public class OrderResource {
 
     private final OrderService orderService;
