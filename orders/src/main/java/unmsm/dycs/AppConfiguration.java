@@ -3,8 +3,6 @@ package unmsm.dycs;
 import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
 
-import org.hibernate.validator.constraints.NotBlank;
-
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import io.dropwizard.Configuration;
@@ -12,44 +10,30 @@ import io.dropwizard.db.DataSourceFactory;
 import io.federecio.dropwizard.swagger.SwaggerBundleConfiguration;
 
 public class AppConfiguration extends Configuration {
-  @NotBlank
-  @NotNull
-  private String securityServiceBaseUrl;
-  @Valid
-  @NotNull
-  private DataSourceFactory database = new DataSourceFactory();
 
-  @JsonProperty("database")
-  public void setDataSourceFactory(DataSourceFactory factory) {
-    this.database = factory;
-  }
+    @Valid
+    @NotNull
+    private DataSourceFactory database = new DataSourceFactory();
 
-  @JsonProperty("database")
-  public DataSourceFactory getDataSourceFactory() {
-    return database;
-  }
-  
-  @JsonProperty("swagger")
-  private SwaggerBundleConfiguration swaggerBundleConfiguration;
-  
+    @JsonProperty("database")
+    public void setDataSourceFactory(DataSourceFactory factory) {
+        this.database = factory;
+    }
 
+    @JsonProperty("database")
+    public DataSourceFactory getDataSourceFactory() {
+        return database;
+    }
 
-  public SwaggerBundleConfiguration getSwaggerBundleConfiguration() {
-      return swaggerBundleConfiguration;
-  }
+    @JsonProperty("swagger")
+    private SwaggerBundleConfiguration swaggerBundleConfiguration;
 
-  public void setSwaggerBundleConfiguration(SwaggerBundleConfiguration swaggerBundleConfiguration) {
-      this.swaggerBundleConfiguration = swaggerBundleConfiguration;
-  }
+    public SwaggerBundleConfiguration getSwaggerBundleConfiguration() {
+        return swaggerBundleConfiguration;
+    }
 
-  @NotNull
-  public String getSecurityServiceBaseUrl() {
-    return securityServiceBaseUrl;
-  }
-
-  public void setSecurityServiceBaseUrl(@NotNull String securityServiceBaseUrl) {
-    this.securityServiceBaseUrl = securityServiceBaseUrl;
-  }
+    public void setSwaggerBundleConfiguration(SwaggerBundleConfiguration swaggerBundleConfiguration) {
+        this.swaggerBundleConfiguration = swaggerBundleConfiguration;
+    }
 
 }
-
