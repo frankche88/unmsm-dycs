@@ -21,7 +21,7 @@ apply plugin: 'com.bmuschko.docker-remote-api'
 
 version "0.1-SNAPSHOT"
 
-mainClassName = "unmsm.dycs.microservices.orders.App"
+mainClassName = "unmsm.dycs.App"
 
 run {
   args += ['server', './src/main/resources/config.yaml']
@@ -64,7 +64,7 @@ dependencies {
   }
   compile 'org.postgresql:postgresql:42.2.4'
 
-  compile project(':security')
+  compile project(':app-security')
 
   // Use JUnit test framework
   testImplementation 'junit:junit:4.12'

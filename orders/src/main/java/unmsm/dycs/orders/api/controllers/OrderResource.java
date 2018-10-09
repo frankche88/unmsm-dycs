@@ -1,0 +1,40 @@
+package unmsm.dycs.orders.api.controllers;
+
+import javax.annotation.security.RolesAllowed;
+import javax.validation.Valid;
+import javax.ws.rs.*;
+import javax.ws.rs.core.MediaType;
+
+import unmsm.dycs.orders.application.OrderService;
+import unmsm.dycs.orders.domain.entity.Order;
+
+import java.util.List;
+
+@RolesAllowed("ADMIN")
+@Path("/v1/orders")
+@Produces(MediaType.APPLICATION_JSON)
+public class OrderResource {
+  private final OrderService orderService;
+
+  public OrderResource(OrderService orderService) {
+    this.orderService = orderService;
+  }
+
+
+  @POST
+  public Order create(@Valid Order customer) {
+    return orderService.create(customer);
+  }
+
+  @DELETE
+  @Path("/{id}")
+  public void delete(@PathParam("id") Long id) {
+    orderService.delete(id);
+  }
+
+  @GET
+  @Path("/_customer")
+  public List<Order> ordersList(@QueryParam("id") Long id) {
+    return orderService.ordersByCustomer(id);
+  }
+}
