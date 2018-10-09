@@ -44,7 +44,7 @@
 			cascade="save-update" lazy="true" fetch="select">
 
 			<key>
-				<column name="order_id" not-null="true" />
+				<column name="order_id" not-null="false" />
 			</key>
 
 			<one-to-many

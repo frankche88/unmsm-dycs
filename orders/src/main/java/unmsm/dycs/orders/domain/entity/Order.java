@@ -1,15 +1,15 @@
 package unmsm.dycs.orders.domain.entity;
 
-import java.util.ArrayList;
 import java.util.Date;
-import java.util.List;
+import java.util.HashSet;
+import java.util.Set;
 
 import unmsm.dycs.commons.domain.enumeration.OrderStatus;
 import unmsm.dycs.commons.domain.valueobject.Money;
 
 public class Order {
 	
-	private long orderId;
+	private Long orderId;
 
 	private String address;
 
@@ -23,13 +23,13 @@ public class Order {
 	
 	private Buyer buyer;
 	
-	private List<OrderItem> orderItems = new ArrayList<>();
+	private Set<OrderItem> orderItems = new HashSet<>();
 
-	public long getOrderId() {
+	public Long getOrderId() {
 		return orderId;
 	}
 
-	public void setOrderId(long orderId) {
+	public void setOrderId(Long orderId) {
 		this.orderId = orderId;
 	}
 
@@ -81,11 +81,11 @@ public class Order {
 		this.buyer = buyer;
 	}
 
-	public List<OrderItem> getOrderItems() {
+	public Set<OrderItem> getOrderItems() {
 		return orderItems;
 	}
 
-	public void setOrderItems(List<OrderItem> orderItems) {
+	public void setOrderItems(Set<OrderItem> orderItems) {
 		this.orderItems = orderItems;
 	}
 	

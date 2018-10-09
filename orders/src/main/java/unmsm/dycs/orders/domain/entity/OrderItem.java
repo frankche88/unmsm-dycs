@@ -6,9 +6,9 @@ public class OrderItem {
 	
 	private int Id;
 	
-	private long orderId;
+	private Long orderId;
 	
-	private long productId;
+	private Long productId;
 
 	private String productName;
 	
@@ -16,29 +16,29 @@ public class OrderItem {
 	
 	private Money unitPrice;
 
-	private int units;
+	private Integer units;
 
-    public int getId() {
+    public Integer getId() {
         return Id;
     }
 
-    public void setId(int id) {
+    public void setId(Integer id) {
         Id = id;
     }
 
-    public long getOrderId() {
+    public Long getOrderId() {
         return orderId;
     }
 
-    public void setOrderId(long orderId) {
+    public void setOrderId(Long orderId) {
         this.orderId = orderId;
     }
 
-    public long getProductId() {
+    public Long getProductId() {
         return productId;
     }
 
-    public void setProductId(long productId) {
+    public void setProductId(Long productId) {
         this.productId = productId;
     }
 
