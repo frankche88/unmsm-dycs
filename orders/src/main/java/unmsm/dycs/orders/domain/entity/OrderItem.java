@@ -6,9 +6,9 @@ public class OrderItem {
 	
 	private int Id;
 	
-	private int orderId;
+	private long orderId;
 	
-	private int productId;
+	private long productId;
 
 	private String productName;
 	
@@ -18,61 +18,59 @@ public class OrderItem {
 
 	private int units;
 
-	public int getId() {
-		return Id;
-	}
+    public int getId() {
+        return Id;
+    }
 
-	public void setId(int id) {
-		Id = id;
-	}
+    public void setId(int id) {
+        Id = id;
+    }
 
-	public int getOrderId() {
-		return orderId;
-	}
+    public long getOrderId() {
+        return orderId;
+    }
 
-	public void setOrderId(int orderId) {
-		this.orderId = orderId;
-	}
+    public void setOrderId(long orderId) {
+        this.orderId = orderId;
+    }
 
-	public String getProductName() {
-		return productName;
-	}
+    public long getProductId() {
+        return productId;
+    }
 
-	public void setProductName(String productName) {
-		this.productName = productName;
-	}
+    public void setProductId(long productId) {
+        this.productId = productId;
+    }
 
-	public String getPictureUrl() {
-		return pictureUrl;
-	}
+    public String getProductName() {
+        return productName;
+    }
 
-	public void setPictureUrl(String pictureUrl) {
-		this.pictureUrl = pictureUrl;
-	}
+    public void setProductName(String productName) {
+        this.productName = productName;
+    }
 
-	public Money getUnitPrice() {
-		return unitPrice;
-	}
+    public String getPictureUrl() {
+        return pictureUrl;
+    }
 
-	public void setUnitPrice(Money unitPrice) {
-		this.unitPrice = unitPrice;
-	}
+    public void setPictureUrl(String pictureUrl) {
+        this.pictureUrl = pictureUrl;
+    }
 
-	public int getUnits() {
-		return units;
-	}
+    public Money getUnitPrice() {
+        return unitPrice;
+    }
 
-	public void setUnits(int units) {
-		this.units = units;
-	}
+    public void setUnitPrice(Money unitPrice) {
+        this.unitPrice = unitPrice;
+    }
 
-	public int getProductId() {
-		return productId;
-	}
+    public int getUnits() {
+        return units;
+    }
 
-	public void setProductId(int productId) {
-		this.productId = productId;
-	}
-
-
+    public void setUnits(int units) {
+        this.units = units;
+    }
 }
