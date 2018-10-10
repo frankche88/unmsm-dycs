@@ -10,10 +10,12 @@ import unmsm.dycs.orders.domain.entity.Order;
 
 public class OrderAssembler {
 
-	public Order toEntity(OrderDto OrderCreateDto) {
+	public Order toEntity(OrderDto orderCreateDto) {
 		ModelMapper _mapper = new ModelMapper();
-		_mapper.addMappings(new OrderCreateMapper());
-		return _mapper.map(OrderCreateDto, Order.class);
+		_mapper.addMappings(new OrderCreateMoneyMapper());
+		_mapper.addMappings(new OrderItemCreateMoneyMapper());
+		_mapper.addMappings(new OrderBuyerMapper());
+		return _mapper.map(orderCreateDto, Order.class);
 	}
 
 	public OrderDto toDto(Order Order) {

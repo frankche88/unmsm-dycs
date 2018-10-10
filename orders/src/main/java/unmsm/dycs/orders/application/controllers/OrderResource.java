@@ -29,8 +29,6 @@ public class OrderResource {
 
     private final OrderService orderService;
     
-
-    
     private OrderAssembler orderAssembler;
 
     @Inject
@@ -42,8 +40,11 @@ public class OrderResource {
 
     @POST
     @UnitOfWork
-    public Order create(@Valid Order customer) {
-        return orderService.create(customer);
+    public Order create(@Valid OrderDto orderDto) {
+    	
+    	Order order = orderAssembler.toEntity(orderDto);
+    	
+        return orderService.create(order);
     }
 
     @DELETE

@@ -6,7 +6,7 @@ import unmsm.dycs.commons.domain.valueobject.Money;
 import unmsm.dycs.orders.application.dto.OrderDto;
 import unmsm.dycs.orders.domain.entity.Order;
 
-public class OrderCreateMapper extends PropertyMap<OrderDto, Order> {
+public class OrderCreateMoneyMapper extends PropertyMap<OrderDto, Order> {
 
         @Override
         protected void configure() {
