@@ -14,11 +14,12 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.MediaType;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.ObjectMapper;
-
 import io.dropwizard.hibernate.UnitOfWork;
 import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiKeyAuthDefinition;
+import io.swagger.annotations.ApiKeyAuthDefinition.ApiKeyLocation;
+import io.swagger.annotations.SecurityDefinition;
+import io.swagger.annotations.SwaggerDefinition;
 import unmsm.dycs.orders.application.OrderService;
 import unmsm.dycs.orders.application.assembler.OrderAssembler;
 import unmsm.dycs.orders.application.dto.OrderDto;
@@ -27,11 +28,13 @@ import unmsm.dycs.orders.domain.entity.Order;
 @RolesAllowed("ADMIN")
 @Path("/v1/orders")
 @Produces(MediaType.APPLICATION_JSON)
+@SwaggerDefinition(securityDefinition = @SecurityDefinition(apiKeyAuthDefinitions = {
+        @ApiKeyAuthDefinition(key = "user", name = "Authorization", in = ApiKeyLocation.HEADER) }))
 @Api(value = "v1/orders")
 public class OrderResource {
 
     private final OrderService orderService;
-    
+
     private OrderAssembler orderAssembler;
 
     @Inject
@@ -44,12 +47,10 @@ public class OrderResource {
     @POST
     @UnitOfWork
     public OrderDto create(@Valid OrderDto orderDto) {
-    	
-    	Order order = orderAssembler.toEntity(orderDto);
-    	
-    	return orderAssembler.toDto(orderService.create(order));
-    	
-        //return orderService.create(order);
+
+        Order order = orderAssembler.toEntity(orderDto);
+        return orderAssembler.toDto(orderService.create(order));
+
     }
 
     @DELETE
@@ -63,9 +64,9 @@ public class OrderResource {
     @Path("/_buyer")
     @UnitOfWork
     public List<OrderDto> ordersList(@QueryParam("id") Long id) {
-    	
-    	List<Order> orders = orderService.ordersByBuyer(id);
-    	
+
+        List<Order> orders = orderService.ordersByBuyer(id);
+
         return orderAssembler.toDto(orders);
     }
 }

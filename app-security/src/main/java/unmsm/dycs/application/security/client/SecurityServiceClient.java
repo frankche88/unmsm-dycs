@@ -1,4 +1,4 @@
-package unmsm.dycs.microservices.security.client;
+package unmsm.dycs.application.security.client;
 
 import retrofit2.Call;
 import retrofit2.http.Body;

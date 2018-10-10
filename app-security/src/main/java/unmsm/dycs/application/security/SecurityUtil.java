@@ -1,4 +1,4 @@
-package unmsm.dycs.microservices.security;
+package unmsm.dycs.application.security;
 
 import brave.Tracing;
 import brave.okhttp3.TracingCallFactory;
@@ -12,8 +12,8 @@ import org.glassfish.jersey.server.filter.RolesAllowedDynamicFeature;
 
 import retrofit2.Retrofit;
 import retrofit2.converter.jackson.JacksonConverterFactory;
-import unmsm.dycs.microservices.security.client.ApplicationUser;
-import unmsm.dycs.microservices.security.client.SecurityServiceClient;
+import unmsm.dycs.application.security.client.ApplicationUser;
+import unmsm.dycs.application.security.client.SecurityServiceClient;
 
 public class SecurityUtil {
   public static SecurityServiceClient register(String securityBaseUrl, Environment environment, Tracing tracing) {
