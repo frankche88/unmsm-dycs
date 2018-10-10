@@ -9,11 +9,11 @@
             <column name="id" not-null="true"/>
         </id>
 
-        <property name="orderId" column="order_id"/>
+        <!-- property name="orderId" column="order_id"/ -->
         
-        <!--  many-to-one name="order"
+        <many-to-one name="order"
             class="unmsm.dycs.orders.domain.entity.Order" column="order_id"
-            not-null="true" / -->
+            not-null="true" />
         
         
         <property name="productId" column="product_id" />

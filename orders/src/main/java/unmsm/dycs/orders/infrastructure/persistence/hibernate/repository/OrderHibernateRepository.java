@@ -1,5 +1,6 @@
 package unmsm.dycs.orders.infrastructure.persistence.hibernate.repository;
 
+import java.util.Iterator;
 import java.util.List;
 import java.util.Optional;
 
@@ -9,6 +10,7 @@ import javax.persistence.criteria.Root;
 
 import unmsm.dycs.commons.infrastructure.persistence.hibernate.repository.BaseHibernateRepository;
 import unmsm.dycs.orders.domain.entity.Order;
+import unmsm.dycs.orders.domain.entity.OrderItem;
 import unmsm.dycs.orders.domain.repository.OrderRepository;
 
 public class OrderHibernateRepository extends BaseHibernateRepository<Order> implements OrderRepository {
@@ -21,6 +23,14 @@ public class OrderHibernateRepository extends BaseHibernateRepository<Order> imp
         }
         
         this.save(order);
+        
+        Iterator<OrderItem> iterItems = order.getOrderItems().iterator();
+
+        while (iterItems.hasNext()) {
+            OrderItem orderItem = (OrderItem) iterItems.next();
+            orderItem.setOrder(order);
+            getSession().save(orderItem);
+        }
         return order;
     }
 

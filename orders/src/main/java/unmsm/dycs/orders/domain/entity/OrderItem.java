@@ -6,7 +6,7 @@ public class OrderItem {
 	
 	private Long id;
 	
-	private Long orderId;
+	private Order order;
 	
 	private Long productId;
 
@@ -24,14 +24,6 @@ public class OrderItem {
 
     public void setId(Long id) {
         this.id = id;
-    }
-
-    public Long getOrderId() {
-        return orderId;
-    }
-
-    public void setOrderId(Long orderId) {
-        this.orderId = orderId;
     }
 
     public Long getProductId() {
@@ -71,6 +63,18 @@ public class OrderItem {
     }
 
     public void setUnits(int units) {
+        this.units = units;
+    }
+
+    public Order getOrder() {
+        return order;
+    }
+
+    public void setOrder(Order order) {
+        this.order = order;
+    }
+
+    protected void setUnits(Integer units) {
         this.units = units;
     }
 }

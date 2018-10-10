@@ -43,23 +43,13 @@ public class OrderResource {
 
     @POST
     @UnitOfWork
-    public Order create(@Valid OrderDto orderDto) {
+    public OrderDto create(@Valid OrderDto orderDto) {
     	
     	Order order = orderAssembler.toEntity(orderDto);
     	
-    	ObjectMapper mapper = new ObjectMapper();  
+    	return orderAssembler.toDto(orderService.create(order));
     	
-    	try {
-            String json = mapper.writeValueAsString(order);
-            
-            System.out.println("OrderResource.create(): " + json);
-            
-        } catch (JsonProcessingException e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
-        }
-    	
-        return orderService.create(order);
+        //return orderService.create(order);
     }
 
     @DELETE
@@ -70,20 +60,12 @@ public class OrderResource {
     }
 
     @GET
-    @Path("/_customer")
+    @Path("/_buyer")
     @UnitOfWork
     public List<OrderDto> ordersList(@QueryParam("id") Long id) {
     	
     	List<Order> orders = orderService.ordersByBuyer(id);
     	
         return orderAssembler.toDto(orders);
-    }
-
-    @GET
-    @Path("/buyer")
-    @UnitOfWork
-    public List<Order> ordersBuyerList(@QueryParam("id") Long id) {
-    	
-        return orderService.ordersByBuyer(id);
     }
 }

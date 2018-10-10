@@ -1,11 +1,12 @@
 buildscript {
   repositories {
-    jcenter()
+    maven { url "${sunatPUrepo}libs-release" }
     mavenCentral()
   }
   dependencies {
-    classpath 'com.github.jengelman.gradle.plugins:shadow:2.0.3'
-    classpath 'com.bmuschko:gradle-docker-plugin:3.6.0'
+    classpath 'com.github.jengelman.gradle.plugins:shadow:1.2.4'
+    classpath 'com.bmuschko:gradle-docker-plugin:3.0.7'
+    classpath 'com.bmuschko:gradle-docker-plugin:3.0.7'
   }
 }
 
@@ -88,7 +89,7 @@ dependencies {
 }
 
 repositories {
-  jcenter()
+  maven { url "${sunatPUrepo}libs-release" }
   mavenCentral()
 }
 

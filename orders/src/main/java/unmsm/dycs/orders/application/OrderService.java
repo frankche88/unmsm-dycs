@@ -24,7 +24,7 @@ public class OrderService {
 
         while (iterItems.hasNext()) {
             OrderItem orderItem = (OrderItem) iterItems.next();
-            orderItem.setOrderId(order.getOrderId());
+            orderItem.setOrder(order);
         }
         
         
