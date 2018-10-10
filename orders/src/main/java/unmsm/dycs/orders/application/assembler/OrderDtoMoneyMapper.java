@@ -5,7 +5,7 @@ import org.modelmapper.PropertyMap;
 import unmsm.dycs.orders.application.dto.OrderDto;
 import unmsm.dycs.orders.domain.entity.Order;
 
-public class OrderDtoListMapper extends PropertyMap<Order, OrderDto> {
+public class OrderDtoMoneyMapper extends PropertyMap<Order, OrderDto> {
 
         @Override
         protected void configure() {

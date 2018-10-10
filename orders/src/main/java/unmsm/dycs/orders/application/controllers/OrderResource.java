@@ -17,6 +17,8 @@ import javax.ws.rs.core.MediaType;
 import io.dropwizard.hibernate.UnitOfWork;
 import io.swagger.annotations.Api;
 import unmsm.dycs.orders.application.OrderService;
+import unmsm.dycs.orders.application.assembler.OrderAssembler;
+import unmsm.dycs.orders.application.dto.OrderDto;
 import unmsm.dycs.orders.domain.entity.Order;
 
 @RolesAllowed("ADMIN")
@@ -26,9 +28,15 @@ import unmsm.dycs.orders.domain.entity.Order;
 public class OrderResource {
 
     private final OrderService orderService;
+    
+
+    
+    private OrderAssembler orderAssembler;
 
     @Inject
-    public OrderResource(OrderService orderService) {
+    public OrderResource(OrderService orderService, OrderAssembler assembler) {
+
+        this.orderAssembler = assembler;
         this.orderService = orderService;
     }
 
@@ -48,7 +56,18 @@ public class OrderResource {
     @GET
     @Path("/_customer")
     @UnitOfWork
-    public List<Order> ordersList(@QueryParam("id") Long id) {
+    public List<OrderDto> ordersList(@QueryParam("id") Long id) {
+    	
+    	List<Order> orders = orderService.ordersByBuyer(id);
+    	
+        return orderAssembler.toDto(orders);
+    }
+
+    @GET
+    @Path("/buyer")
+    @UnitOfWork
+    public List<Order> ordersBuyerList(@QueryParam("id") Long id) {
+    	
         return orderService.ordersByBuyer(id);
     }
 }

@@ -37,7 +37,7 @@
 
 		<many-to-one name="buyer"
 			class="unmsm.dycs.orders.domain.entity.Buyer" column="buyer_id"
-			not-null="true" />
+			not-null="true" lazy="false"  />
 
 
 		<set name="orderItems" table="order_items" inverse="true"

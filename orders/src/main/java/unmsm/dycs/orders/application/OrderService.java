@@ -13,8 +13,8 @@ public class OrderService {
     private final OrderRepository repository;
     
     @Inject
-    public OrderService(OrderRepository dao) {
-        this.repository = dao;
+    public OrderService(OrderRepository repository) {
+        this.repository = repository;
     }
 
     public Order create(Order order) {
@@ -24,6 +24,9 @@ public class OrderService {
     }
 
     public List<Order> ordersByBuyer(Long id) {
+    	
+    	
+    	
         return repository.findByBuyer(id);
     }
 

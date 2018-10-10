@@ -2,9 +2,8 @@ package unmsm.dycs.orders.application.dto;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
-
-import org.joda.time.DateTime;
 
 import unmsm.dycs.commons.domain.enumeration.OrderStatus;
 
@@ -15,12 +14,14 @@ public class OrderDto {
 	private String userName;
 	
 	private String firstName;
+	
 	private String lastName;
-	private String buyerId;
+	
+	private long buyerId;
 
 	private String address;
 
-	public DateTime orderDate;
+	public Date orderDate;
 
 	public OrderStatus orderStatus;
 	private String paymentAuthCode;
@@ -55,19 +56,19 @@ public class OrderDto {
 		this.lastName = lastName;
 	}
 
-	public DateTime getOrderDate() {
+	public Date getOrderDate() {
 		return orderDate;
 	}
 
-	public void setOrderDate(DateTime orderDate) {
+	public void setOrderDate(Date orderDate) {
 		this.orderDate = orderDate;
 	}
 
-	public String getBuyerId() {
+	public long getBuyerId() {
 		return buyerId;
 	}
 
-	public void setBuyerId(String buyerId) {
+	public void setBuyerId(long buyerId) {
 		this.buyerId = buyerId;
 	}
 
