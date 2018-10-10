@@ -4,6 +4,7 @@ import io.dropwizard.Application;
 import io.dropwizard.configuration.EnvironmentVariableSubstitutor;
 import io.dropwizard.configuration.SubstitutingSourceProvider;
 import io.dropwizard.db.DataSourceFactory;
+import io.dropwizard.jersey.jackson.JsonProcessingExceptionMapper;
 import io.dropwizard.migrations.MigrationsBundle;
 import io.dropwizard.setup.Bootstrap;
 import io.dropwizard.setup.Environment;
@@ -52,6 +53,9 @@ public class App extends Application<AppConfiguration> {
     public void run(AppConfiguration configuration, Environment environment) throws Exception {
 
         environment.jersey().register(new InvalidCustomerExceptionMapper());
+        
+        environment.jersey().register(new JsonProcessingExceptionMapper(true));
+        
     }
 
 }
