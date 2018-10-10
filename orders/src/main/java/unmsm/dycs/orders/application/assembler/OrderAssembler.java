@@ -13,8 +13,8 @@ public class OrderAssembler {
 	public Order toEntity(OrderDto orderCreateDto) {
 		ModelMapper _mapper = new ModelMapper();
 		_mapper.addMappings(new OrderCreateMoneyMapper());
-		_mapper.addMappings(new OrderItemCreateMoneyMapper());
 		_mapper.addMappings(new OrderBuyerMapper());
+        _mapper.addMappings(new OrderItemCreateMoneyMapper());
 		return _mapper.map(orderCreateDto, Order.class);
 	}
 

@@ -4,7 +4,7 @@ import unmsm.dycs.commons.domain.valueobject.Money;
 
 public class OrderItem {
 	
-	private Long Id;
+	private Long id;
 	
 	private Long orderId;
 	
@@ -19,11 +19,11 @@ public class OrderItem {
 	private Integer units;
 
     public Long getId() {
-        return Id;
+        return id;
     }
 
     public void setId(Long id) {
-        Id = id;
+        this.id = id;
     }
 
     public Long getOrderId() {

@@ -14,6 +14,9 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.MediaType;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
+
 import io.dropwizard.hibernate.UnitOfWork;
 import io.swagger.annotations.Api;
 import unmsm.dycs.orders.application.OrderService;
@@ -43,6 +46,18 @@ public class OrderResource {
     public Order create(@Valid OrderDto orderDto) {
     	
     	Order order = orderAssembler.toEntity(orderDto);
+    	
+    	ObjectMapper mapper = new ObjectMapper();  
+    	
+    	try {
+            String json = mapper.writeValueAsString(order);
+            
+            System.out.println("OrderResource.create(): " + json);
+            
+        } catch (JsonProcessingException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
     	
         return orderService.create(order);
     }

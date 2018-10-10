@@ -16,6 +16,10 @@ public class OrderHibernateRepository extends BaseHibernateRepository<Order> imp
     @Override
     public Order create(Order order) {
 
+        if(order.getBuyer() != null) {
+            getSession().saveOrUpdate(order.getBuyer());
+        }
+        
         this.save(order);
         return order;
     }

@@ -1,11 +1,12 @@
 package unmsm.dycs.orders.application;
 
-import java.util.Date;
+import java.util.Iterator;
 import java.util.List;
 
 import javax.inject.Inject;
 
 import unmsm.dycs.orders.domain.entity.Order;
+import unmsm.dycs.orders.domain.entity.OrderItem;
 import unmsm.dycs.orders.domain.repository.OrderRepository;
 
 public class OrderService {
@@ -18,8 +19,15 @@ public class OrderService {
     }
 
     public Order create(Order order) {
+        
+        Iterator<OrderItem> iterItems = order.getOrderItems().iterator();
 
-        order.setOrderDate(new Date());
+        while (iterItems.hasNext()) {
+            OrderItem orderItem = (OrderItem) iterItems.next();
+            orderItem.setOrderId(order.getOrderId());
+        }
+        
+        
         return repository.create(order);
     }
 
