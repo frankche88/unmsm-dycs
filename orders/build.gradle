@@ -25,6 +25,7 @@ mainClassName = "unmsm.dycs.App"
 
 run {
   args += ['server', './src/main/resources/config.yaml']
+  //args += ['db', 'migrate', './src/main/resources/config.yaml']
 }
 
 shadowJar {
