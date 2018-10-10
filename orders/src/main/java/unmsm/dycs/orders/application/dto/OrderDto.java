@@ -1,9 +1,9 @@
 package unmsm.dycs.orders.application.dto;
 
 import java.math.BigDecimal;
-import java.util.ArrayList;
 import java.util.Date;
-import java.util.List;
+import java.util.HashSet;
+import java.util.Set;
 
 import unmsm.dycs.commons.domain.enumeration.OrderStatus;
 
@@ -26,10 +26,10 @@ public class OrderDto {
 	public OrderStatus orderStatus;
 	private String paymentAuthCode;
 	public BigDecimal orderTotal;
-	public List<OrderItemDto> orderItems;
+	public Set<OrderItemDto> orderItems;
 
 	protected OrderDto() {
-		orderItems = new ArrayList<OrderItemDto>();
+		orderItems = new HashSet<OrderItemDto>();
 	}
 
 	public int getOrderId() {
@@ -112,11 +112,11 @@ public class OrderDto {
 		this.orderTotal = orderTotal;
 	}
 
-	public List<OrderItemDto> getOrderItems() {
+	public Set<OrderItemDto> getOrderItems() {
 		return orderItems;
 	}
 
-	public void setOrderItems(List<OrderItemDto> orderItems) {
+	public void setOrderItems(Set<OrderItemDto> orderItems) {
 		this.orderItems = orderItems;
 	}
 

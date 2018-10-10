@@ -20,6 +20,8 @@ public class OrderAssembler {
 		ModelMapper _mapper = new ModelMapper();
 		_mapper.addMappings(new OrderDtoBuyerMapper());
 		_mapper.addMappings(new OrderDtoMoneyMapper());
+		_mapper.addMappings(new OrderItemDtoMoneyMapper());
+		
 		return _mapper.map(Order, OrderDto.class);
 	}
 

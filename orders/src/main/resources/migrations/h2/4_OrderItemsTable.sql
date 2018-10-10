@@ -10,3 +10,23 @@ CREATE TABLE order_items (
     PRIMARY KEY (id, order_id),
     CONSTRAINT FK_items_order_id FOREIGN KEY(order_id) REFERENCES orders(order_id)
 );
+
+insert into order_items (
+  id,
+  order_id,
+  product_id,
+  product_name,
+  picture_url,
+  unit_price,
+  currency,
+  units) values (1,1,122,'un producto', 'una ruta de imagen',20.67,'PEN',200);
+
+insert into order_items (
+  id,
+  order_id,
+  product_id,
+  product_name,
+  picture_url,
+  unit_price,
+  currency,
+  units) values (2,1,122,'otro producto', 'una ruta de imagen',20.67,'PEN',200);

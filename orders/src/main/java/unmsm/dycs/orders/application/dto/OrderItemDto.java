@@ -4,24 +4,24 @@ import java.math.BigDecimal;
 
 public class OrderItemDto {
 
-	public int Id;
+	public long Id;
 
 	public String ProductName;
 	public String PictureUrl;
 	public BigDecimal UnitPrice;
 
-	public int units;
-	public int productId;
+	public long units;
+	public long productId;
 
 	protected OrderItemDto() {
 	}
 
 	
-	public int getId() {
+	public long getId() {
 		return Id;
 	}
 
-	public void setId(int id) {
+	public void setId(long id) {
 		Id = id;
 	}
 
@@ -49,19 +49,19 @@ public class OrderItemDto {
 		UnitPrice = unitPrice;
 	}
 
-	public int getUnits() {
+	public long getUnits() {
 		return units;
 	}
 
-	public void setUnits(int units) {
+	public void setUnits(long units) {
 		this.units = units;
 	}
 
-	public int getProductId() {
+	public long getProductId() {
 		return productId;
 	}
 
-	public void setProductId(int productId) {
+	public void setProductId(long productId) {
 		this.productId = productId;
 	}
 
