@@ -28,6 +28,13 @@ run {
   //args += ['db', 'migrate', './src/main/resources/config.yaml']
 }
 
+task myRun(type: JavaExec) {
+  classpath sourceSets.main.runtimeClasspath
+  main = "unmsm.dycs.App"
+  args "db", "migrate", './src/main/resources/config.yaml'
+}
+
+
 shadowJar {
   baseName = 'service'
   classifier = null
