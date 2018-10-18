@@ -19,7 +19,6 @@ import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiKeyAuthDefinition;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.Authorization;
-import io.swagger.annotations.OAuth2Definition;
 import io.swagger.annotations.SecurityDefinition;
 import io.swagger.annotations.SwaggerDefinition;
 import unmsm.dycs.orders.application.OrderService;
@@ -31,7 +30,7 @@ import unmsm.dycs.orders.domain.entity.Order;
 
 @SwaggerDefinition(securityDefinition = @SecurityDefinition(
         apiKeyAuthDefinitions = {
-                @ApiKeyAuthDefinition(key = "bearer", in = ApiKeyAuthDefinition.ApiKeyLocation.HEADER, name = "bearer") 
+                @ApiKeyAuthDefinition(key = "Bearer", in = ApiKeyAuthDefinition.ApiKeyLocation.HEADER, name = "Bearer") 
                 }
 //        ,
 //        oAuth2Definitions = {
@@ -40,7 +39,7 @@ import unmsm.dycs.orders.domain.entity.Order;
         )
 )
 
-@RolesAllowed("ADMIN")
+@RolesAllowed({"admin", "member"})
 @Path("/api/orders")
 @Produces(MediaType.APPLICATION_JSON)
 @Api(value = "/api/orders")
@@ -60,7 +59,7 @@ public class OrderResource {
     @POST
     @UnitOfWork
     @ApiOperation(value = "Add order", notes = "Agregate new Order", authorizations = {
-            @Authorization(value = "bearer") })
+            @Authorization(value = "Bearer") })
     public Order create(@Valid OrderInputDto orderDto) {
 
         Order order = orderAssembler.toEntity(orderDto);
@@ -72,7 +71,7 @@ public class OrderResource {
     @Path("/{id}")
     @UnitOfWork
     @ApiOperation(value = "Remove order", notes = "Remove Order by id order", authorizations = {
-            @Authorization(value = "bearer") })
+            @Authorization(value = "Bearer") })
     public void delete(@PathParam("id") Long id) {
         orderService.delete(id);
     }
@@ -81,7 +80,7 @@ public class OrderResource {
     @Path("/{id}")
     @UnitOfWork
     @ApiOperation(value = "show order", notes = "Show Order by id order", authorizations = {
-            @Authorization(value = "bearer") })
+            @Authorization(value = "Bearer") })
     public OrderOutputDto ordersList(@QueryParam("id") Long id) {
 
         Order order = orderService.orderById(id);
@@ -92,7 +91,7 @@ public class OrderResource {
     @GET
     @UnitOfWork
     @ApiOperation(value = "List orders", notes = "List all orders", authorizations = {
-            @Authorization(value = "bearer") })
+            @Authorization(value = "Bearer") })
     public List<OrderHeaderOutputDto> ordersList() {
 
         return orderAssembler.toHeaderDto(orderService.findAll());

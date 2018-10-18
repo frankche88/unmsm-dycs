@@ -5,6 +5,11 @@ server:
   adminConnectors:
   - type: http
     port: 9001
+#JWT
+jwt:
+  tokenKey: ${JWT_TOKEN_KEY}
+  issuer: ${JWT_ISSUER}
+  audience: ${JWT_AUDIENCE}
 #,app.movies.api.controller,banking.oauth.api.controller
 swagger:
   resourcePackage: unmsm.dycs.orders.application.controllers 

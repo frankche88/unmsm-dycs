@@ -37,6 +37,7 @@ public class OAuthDynamicFeature extends AuthDynamicFeature {
 
     @Inject
     public OAuthDynamicFeature(OAuthAuthenticator authenticator, UserAuthorizer authorizer, Environment environment) {
+        
         super(new OAuthCredentialAuthFilter.Builder<ApplicationUser>().setAuthenticator(authenticator).setAuthorizer(authorizer)
                 .setPrefix("Bearer").buildAuthFilter());
         environment.jersey().register(RolesAllowedDynamicFeature.class);
@@ -49,6 +50,8 @@ public class OAuthDynamicFeature extends AuthDynamicFeature {
     public static class OAuthAuthenticator implements Authenticator<String, ApplicationUser> {
         
         Logger logger = LoggerFactory.getLogger(OAuthDynamicFeature.class);
+        @Inject
+        private JwtOrderConfiguration  jwtConfig;
 
         @Override
         public Optional<ApplicationUser> authenticate(String credentials) throws AuthenticationException {
@@ -56,7 +59,7 @@ public class OAuthDynamicFeature extends AuthDynamicFeature {
             try {
 
                 // decode the base64 encoded string
-                byte[] decodedKey = Base64.getDecoder().decode(JWt_ENCODED_KEY);
+                byte[] decodedKey = Base64.getDecoder().decode(jwtConfig.getTokenKey());
                 // rebuild key using SecretKeySpec
                 Key secretKey = new SecretKeySpec(decodedKey, 0, decodedKey.length, "AES");
 
