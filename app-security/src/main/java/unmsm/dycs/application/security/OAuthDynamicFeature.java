@@ -1,10 +1,7 @@
 package unmsm.dycs.application.security;
 
-import java.security.Key;
-import java.util.Base64;
 import java.util.Optional;
 
-import javax.crypto.spec.SecretKeySpec;
 import javax.inject.Inject;
 import javax.inject.Singleton;
 import javax.ws.rs.ext.Provider;
@@ -12,7 +9,6 @@ import javax.ws.rs.ext.Provider;
 import org.glassfish.jersey.server.filter.RolesAllowedDynamicFeature;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
 
 import io.dropwizard.auth.AuthDynamicFeature;
 import io.dropwizard.auth.AuthValueFactoryProvider;
@@ -30,7 +26,7 @@ import unmsm.dycs.application.security.client.ApplicationUser;
 @Provider
 public class OAuthDynamicFeature extends AuthDynamicFeature {
     
-    //private static final String JWt_ENCODED_KEY = OAuthDynamicFeature.JWt_ENCODED_KEY;
+
     public static final String JWt_ENCODED_KEY = "k8zgjphoSZl4aTtNKiOXMQ==";
     
     Logger logger = LoggerFactory.getLogger(OAuthDynamicFeature.class);
@@ -50,8 +46,13 @@ public class OAuthDynamicFeature extends AuthDynamicFeature {
     public static class OAuthAuthenticator implements Authenticator<String, ApplicationUser> {
         
         Logger logger = LoggerFactory.getLogger(OAuthDynamicFeature.class);
-        @Inject
+        
         private JwtOrderConfiguration  jwtConfig;
+        
+        @Inject
+        public OAuthAuthenticator(JwtOrderConfiguration  jwtConfig) {
+            this.jwtConfig = jwtConfig;
+        }
 
         @Override
         public Optional<ApplicationUser> authenticate(String credentials) throws AuthenticationException {
@@ -59,24 +60,19 @@ public class OAuthDynamicFeature extends AuthDynamicFeature {
             try {
 
                 // decode the base64 encoded string
-                byte[] decodedKey = Base64.getDecoder().decode(jwtConfig.getTokenKey());
-                // rebuild key using SecretKeySpec
-                Key secretKey = new SecretKeySpec(decodedKey, 0, decodedKey.length, "AES");
-
-                Jws<Claims> jwsClaims = Jwts.parser().setSigningKey(secretKey).parseClaimsJws(credentials);
+                
+                Jws<Claims> jwsClaims = Jwts.parser().setSigningKey(jwtConfig.getTokenKey().getBytes()).parseClaimsJws(credentials);;
                 
                 logger.info("jwsClaims: " + jwsClaims);
 
                 String username = jwsClaims.getBody().getSubject();
                 
-                Long customerId = new Long((Integer)jwsClaims.getBody().get("customerId"));
+                Long customerId = new Long((Integer)jwsClaims.getBody().get("userId"));
                 
                 logger.info("customerId: " + customerId);
 
                 String role = (String) jwsClaims.getBody().get("role");
                 
-                //{"sub":"client1","customerId":2,"userName":"client1","role":"member"}
-
                 ApplicationUser user = new ApplicationUser(username, customerId.longValue());
 
                 user.addRole(role);
@@ -85,7 +81,7 @@ public class OAuthDynamicFeature extends AuthDynamicFeature {
 
             } catch (SignatureException e) {
 
-                throw new AuthenticationException("Not autenticate");
+                throw new AuthenticationException("Token not valid", e);
             }
         }
     }
