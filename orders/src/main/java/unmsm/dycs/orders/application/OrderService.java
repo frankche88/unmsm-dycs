@@ -23,11 +23,14 @@ public class OrderService {
         return repository.create(order);
     }
 
-    public List<Order> ordersByBuyer(Long id) {
+    public Order orderById(Long id) {
     	
+        return repository.find(id).get();
+    }
+
+    public List<Order> findAll() {
     	
-    	
-        return repository.findByBuyer(id);
+        return repository.findAll();
     }
 
     public void delete(Long id) {

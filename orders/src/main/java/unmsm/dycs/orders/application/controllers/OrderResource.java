@@ -18,13 +18,15 @@ import io.dropwizard.hibernate.UnitOfWork;
 import io.swagger.annotations.Api;
 import unmsm.dycs.orders.application.OrderService;
 import unmsm.dycs.orders.application.assembler.OrderAssembler;
-import unmsm.dycs.orders.application.dto.OrderDto;
+import unmsm.dycs.orders.application.dto.OrderHeaderOutputDto;
+import unmsm.dycs.orders.application.dto.OrderInputDto;
+import unmsm.dycs.orders.application.dto.OrderOutputDto;
 import unmsm.dycs.orders.domain.entity.Order;
 
 @RolesAllowed("ADMIN")
-@Path("/v1/orders")
+@Path("/api/orders")
 @Produces(MediaType.APPLICATION_JSON)
-@Api(value = "v1/orders")
+@Api(value = "/api/orders")
 public class OrderResource {
 
     private final OrderService orderService;
@@ -40,7 +42,7 @@ public class OrderResource {
 
     @POST
     @UnitOfWork
-    public Order create(@Valid OrderDto orderDto) {
+    public Order create(@Valid OrderInputDto orderDto) {
     	
     	Order order = orderAssembler.toEntity(orderDto);
     	
@@ -55,20 +57,20 @@ public class OrderResource {
     }
 
     @GET
-    @Path("/_customer")
+    @Path("/{id}")
     @UnitOfWork
-    public List<OrderDto> ordersList(@QueryParam("id") Long id) {
+    public OrderOutputDto ordersList(@QueryParam("id") Long id) {
     	
-    	List<Order> orders = orderService.ordersByBuyer(id);
+    	Order order = orderService.orderById(id);
     	
-        return orderAssembler.toDto(orders);
+        return orderAssembler.toDto(order);
     }
 
     @GET
-    @Path("/buyer")
     @UnitOfWork
-    public List<Order> ordersBuyerList(@QueryParam("id") Long id) {
+    public List<OrderHeaderOutputDto> ordersList() {
     	
-        return orderService.ordersByBuyer(id);
+    	return orderAssembler.toHeaderDto(orderService.findAll());
+        		
     }
 }

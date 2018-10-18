@@ -14,8 +14,8 @@ public class Money {
         return currency;
     }
 
-    public BigDecimal amount;
-    public Currency currency;
+    private BigDecimal amount;
+    private Currency currency;
 
     public Money() {
     }

@@ -13,43 +13,40 @@ import unmsm.dycs.orders.domain.repository.OrderRepository;
 
 public class OrderHibernateRepository extends BaseHibernateRepository<Order> implements OrderRepository {
 
-    @Override
-    public Order create(Order order) {
+	@Override
+	public Order create(Order order) {
 
-        this.save(order);
-        return order;
-    }
+		this.save(order);
+		return order;
+	}
 
-    @Override
-    public Optional<Order> find(Long id) {
-        return Optional.ofNullable(this.getSession().find(Order.class, id));
-        
-    }
+	@Override
+	public Optional<Order> find(Long id) {
+		return Optional.ofNullable(this.getSession().find(Order.class, id));
 
-    @Override
-    public void delete(Long id) {
-        Order order = new Order();
-        order.setOrderId(id);
-        this.getSession().delete(order);
+	}
 
-    }
+	@Override
+	public void delete(Long id) {
+		Order order = new Order();
+		this.getSession().delete(order);
 
-    @Override
-    public List<Order> findByBuyer(Long id) {
-        
-        CriteriaBuilder builder = this.getSession().getCriteriaBuilder();
-        
-        CriteriaQuery<Order> criteria = builder.createQuery(Order.class );
-        
-        Root<Order> orderRoot = criteria.from( Order.class );
-        
-        criteria.select( orderRoot );
-        
-        criteria.where( builder.equal( orderRoot.get("buyer").get("buyerId" ), id ) );
-        
-        List<Order> orders = this.getSession().createQuery( criteria ).getResultList();
+	}
 
-        return orders;
-    }
+	@Override
+	public List<Order> findAll() {
+
+		CriteriaBuilder builder = this.getSession().getCriteriaBuilder();
+
+		CriteriaQuery<Order> criteria = builder.createQuery(Order.class);
+
+		Root<Order> orderRoot = criteria.from(Order.class);
+
+		criteria.select(orderRoot);
+
+		List<Order> orders = this.getSession().createQuery(criteria).getResultList();
+
+		return orders;
+	}
 
 }

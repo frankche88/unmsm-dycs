@@ -25,15 +25,12 @@ public class HbnBundle extends HibernateBundle<AppConfiguration> {
 	
 	protected void configure(org.hibernate.cfg.Configuration configuration) {
 		
-		InputStream inputMovie = OrderHibernateRepository.class.getClassLoader().getResourceAsStream("hibernate/Buyer.hbm.xml");
+		InputStream inputOrder = OrderHibernateRepository.class.getClassLoader().getResourceAsStream("hibernate/Order.hbm.xml");
 		
-		InputStream inputDirector = OrderHibernateRepository.class.getClassLoader().getResourceAsStream("hibernate/Order.hbm.xml");
-		
-		InputStream inputCustomer = OrderHibernateRepository.class.getClassLoader().getResourceAsStream("hibernate/OrderItem.hbm.xml");
-		
-		configuration.addInputStream(inputMovie);
-		configuration.addInputStream(inputDirector);
-		configuration.addInputStream(inputCustomer);
+		InputStream inputOrderItem = OrderHibernateRepository.class.getClassLoader().getResourceAsStream("hibernate/OrderItem.hbm.xml");
+
+		configuration.addInputStream(inputOrder);
+		configuration.addInputStream(inputOrderItem);
 
 		
     }

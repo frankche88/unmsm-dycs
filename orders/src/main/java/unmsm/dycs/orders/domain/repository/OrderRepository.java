@@ -13,6 +13,6 @@ public interface OrderRepository {
 
 	void delete(Long id);
 
-	List<Order> findByBuyer(Long id);
+	List<Order> findAll();
 
 }

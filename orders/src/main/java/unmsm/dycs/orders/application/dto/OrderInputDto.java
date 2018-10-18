@@ -1,82 +1,50 @@
-package unmsm.dycs.orders.domain.entity;
+package unmsm.dycs.orders.application.dto;
 
-import java.util.Date;
-import java.util.HashSet;
-import java.util.Set;
+import java.util.List;
 
-public class Order {
+public class OrderInputDto {
 
-	private Long id;
 	private String firstName;
 	private String lastName;
 	private String address;
 	private String creditCardNumber;
 	private String creditCardAuthCode;
-	private Date orderDate;
+	private List<OrderItemInputDto> orderItems;
 	
-	private Set<OrderItem> orderItems = new HashSet<>();
-
-	public Long getId() {
-		return id;
-	}
-
-	public void setId(Long id) {
-		this.id = id;
-	}
-
 	public String getFirstName() {
 		return firstName;
 	}
-
 	public void setFirstName(String firstName) {
 		this.firstName = firstName;
 	}
-
 	public String getLastName() {
 		return lastName;
 	}
-
 	public void setLastName(String lastName) {
 		this.lastName = lastName;
 	}
-
 	public String getAddress() {
 		return address;
 	}
-
 	public void setAddress(String address) {
 		this.address = address;
 	}
-
 	public String getCreditCardNumber() {
 		return creditCardNumber;
 	}
-
 	public void setCreditCardNumber(String creditCardNumber) {
 		this.creditCardNumber = creditCardNumber;
 	}
-
 	public String getCreditCardAuthCode() {
 		return creditCardAuthCode;
 	}
-
 	public void setCreditCardAuthCode(String creditCardAuthCode) {
 		this.creditCardAuthCode = creditCardAuthCode;
 	}
-
-	public Date getOrderDate() {
-		return orderDate;
-	}
-
-	public void setOrderDate(Date orderDate) {
-		this.orderDate = orderDate;
-	}
-
-	public Set<OrderItem> getOrderItems() {
+	public List<OrderItemInputDto> getOrderItems() {
 		return orderItems;
 	}
-
-	public void setOrderItems(Set<OrderItem> orderItems) {
+	public void setOrderItems(List<OrderItemInputDto> orderItems) {
 		this.orderItems = orderItems;
 	}
 

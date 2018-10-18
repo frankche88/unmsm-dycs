@@ -7,38 +7,24 @@
 
 	<class name="Order" table="orders">
 
-		<id name="orderId" column="order_id">
+		<id name="id" column="order_id">
 			<generator class="native" />
 		</id>
 
+
+
+		<property name="firstName" column="first_name" />
+
+		<property name="lastName" column="last_name" />
+
 		<property name="address" column="address" />
 
+		<property name="creditCardNumber" column="credit_card" />
+
+		<property name="creditCardAuthCode"
+			column="credit_card_authcode" />
+
 		<property name="orderDate" column="order_date" />
-
-		<property name="orderStatus" column="order_status">
-		  <type name="org.hibernate.type.EnumType">
-                    <param name="enumClass">unmsm.dycs.commons.domain.enumeration.OrderStatus</param>
-                    <param name="useNamed">false</param>
-                </type>
-		</property>
-
-		<property name="paymentAuthCode" column="payment_authcode" />
-
-		<component name="orderTotal"
-			class="unmsm.dycs.commons.domain.valueobject.Money">
-			<property name="amount" column="order_total" />
-			<property name="currency" column="currency">
-				<type name="org.hibernate.type.EnumType">
-					<param name="enumClass">unmsm.dycs.commons.domain.enumeration.Currency</param>
-					<param name="useNamed">true</param>
-				</type>
-			</property>
-		</component>
-
-		<many-to-one name="buyer"
-			class="unmsm.dycs.orders.domain.entity.Buyer" column="buyer_id"
-			not-null="true" lazy="false"  />
-
 
 		<set name="orderItems" table="order_items" inverse="true"
 			cascade="save-update" lazy="true" fetch="select">
