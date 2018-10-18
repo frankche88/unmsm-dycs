@@ -7,7 +7,7 @@ public class OrderItemOutputDto {
 	private long productId;
 	private String productName;
 	private String pictureUrl;
-	private BigDecimal unit;
+	private Integer unit;
 	private BigDecimal unitPrice;
 	private BigDecimal total;
 	private String currency;
@@ -36,11 +36,11 @@ public class OrderItemOutputDto {
 		this.pictureUrl = pictureUrl;
 	}
 
-	public BigDecimal getUnit() {
+	public Integer getUnit() {
 		return unit;
 	}
 
-	public void setUnit(BigDecimal unit) {
+	public void setUnit(Integer unit) {
 		this.unit = unit;
 	}
 

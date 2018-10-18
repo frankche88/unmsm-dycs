@@ -11,12 +11,12 @@ public class OrderItem {
 	private Long productId;
 	private String productName;
 	private String pictureUrl;
-	private BigDecimal unit;
+	private Integer unit;
 	private Money unitPrice;
 
 	public Money calculateTotal() {
 		if (unit != null && unitPrice != null) {
-			return new Money(unit.multiply(unitPrice.getAmount()), unitPrice.getCurrency());
+			return new Money(unitPrice.getAmount().multiply(new BigDecimal(unit)), unitPrice.getCurrency());
 		}
 
 		return Money.soles(BigDecimal.ZERO);
@@ -55,11 +55,11 @@ public class OrderItem {
 		this.pictureUrl = pictureUrl;
 	}
 
-	public BigDecimal getUnit() {
+	public Integer getUnit() {
 		return unit;
 	}
 
-	public void setUnit(BigDecimal unit) {
+	public void setUnit(Integer unit) {
 		this.unit = unit;
 	}
 

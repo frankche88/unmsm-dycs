@@ -21,6 +21,8 @@
         
         <property name="pictureUrl" column="picture_url"/>
         
+        <property name="unit" column="units"/>
+        
         <component name="unitPrice" class="unmsm.dycs.commons.domain.valueobject.Money">
             <property name="amount" column="unit_price" />
             <property name="currency" column="currency">
@@ -30,8 +32,6 @@
                 </type>
             </property>
         </component>
-        
-        <property name="unit" column="units"/>
         
     </class>
 </hibernate-mapping>

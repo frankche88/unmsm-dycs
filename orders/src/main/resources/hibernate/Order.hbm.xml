@@ -11,8 +11,6 @@
 			<generator class="native" />
 		</id>
 
-
-
 		<property name="firstName" column="first_name" />
 
 		<property name="lastName" column="last_name" />
@@ -26,7 +24,8 @@
 
 		<property name="orderDate" column="order_date" />
 
-		<set name="orderItems" table="order_items" inverse="true" lazy="true" fetch="select">
+		<set name="orderItems" table="order_items" inverse="true"
+			lazy="true" fetch="select">
 
 			<key>
 				<column name="order_id" not-null="true" />
