@@ -1,6 +1,5 @@
 package unmsm.dycs.orders.application;
 
-import java.util.Date;
 import java.util.List;
 
 import javax.inject.Inject;
@@ -18,8 +17,7 @@ public class OrderService {
     }
 
     public Order create(Order order) {
-
-        order.setOrderDate(new Date());
+        
         return repository.create(order);
     }
 

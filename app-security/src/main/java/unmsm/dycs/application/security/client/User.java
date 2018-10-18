@@ -1,8 +1,6 @@
-package unmsm.dycs.microservices.security.client;
+package unmsm.dycs.application.security.client;
 
-import java.security.Principal;
-
-public class ApplicationUser implements Principal {
+public class User {
   private String username;
   private String password;
 
@@ -20,10 +18,5 @@ public class ApplicationUser implements Principal {
 
   public void setPassword(String password) {
     this.password = password;
-  }
-
-  @Override
-  public String getName() {
-    return username;
   }
 }
