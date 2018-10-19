@@ -15,47 +15,45 @@ import unmsm.dycs.orders.infrastructure.application.bundles.SwitchableSwaggerBun
 import unmsm.dycs.orders.infrastructure.application.guice.module.HbnModule;
 
 public class App extends Application<AppConfiguration> {
-    public static void main(String[] args) throws Exception {
-        new App().run(args);
-    }
+	
+	public static void main(String[] args) throws Exception {
+		new App().run(args);
+	}
 
-    @Override
-    public void initialize(Bootstrap<AppConfiguration> bootstrap) {
-        
-        
-        bootstrap.addBundle(new MigrationsBundle<AppConfiguration>() {
-            @Override
-            public DataSourceFactory getDataSourceFactory(AppConfiguration configuration) {
-                return configuration.getDataSourceFactory();
-            }
-        });
+	@Override
+	public void initialize(Bootstrap<AppConfiguration> bootstrap) {
 
-        bootstrap.setConfigurationSourceProvider(new SubstitutingSourceProvider(
-                bootstrap.getConfigurationSourceProvider(), new EnvironmentVariableSubstitutor()));
-        
-        bootstrap.addBundle(new SwitchableSwaggerBundle());
-        
-        bootstrap.addBundle(new CorsBundle());
-        
+		bootstrap.addBundle(new MigrationsBundle<AppConfiguration>() {
+			@Override
+			public DataSourceFactory getDataSourceFactory(AppConfiguration configuration) {
+				return configuration.getDataSourceFactory();
+			}
+		});
 
-        final HbnBundle hibernate = new HbnBundle();
-        
-        // register hbn bundle before guice to make sure factory initialized before guice context start
-        bootstrap.addBundle(hibernate);
-        bootstrap.addBundle(GuiceBundle.builder()
-                .enableAutoConfig("unmsm.dycs")
-                .modules(new HbnModule(hibernate))
-                .build());
+		bootstrap.setConfigurationSourceProvider(new SubstitutingSourceProvider(
+				bootstrap.getConfigurationSourceProvider(), new EnvironmentVariableSubstitutor()));
 
-    }
+		bootstrap.addBundle(new SwitchableSwaggerBundle());
 
-    @Override
-    public void run(AppConfiguration configuration, Environment environment) throws Exception {
+		bootstrap.addBundle(new CorsBundle());
 
-        environment.jersey().register(new InvalidCustomerExceptionMapper());
-        
-        environment.jersey().register(new JsonProcessingExceptionMapper(true));
-        
-    }
+		final HbnBundle hibernate = new HbnBundle();
+
+		// register hbn bundle before guice to make sure factory initialized before
+		// guice context start
+		bootstrap.addBundle(hibernate);
+		bootstrap.addBundle(
+				GuiceBundle.builder().enableAutoConfig("unmsm.dycs").modules(new HbnModule(hibernate)).build());
+
+	}
+
+	@Override
+	public void run(AppConfiguration configuration, Environment environment) throws Exception {
+
+		environment.jersey().register(new InvalidCustomerExceptionMapper());
+
+		environment.jersey().register(new JsonProcessingExceptionMapper(true));
+
+	}
 
 }
