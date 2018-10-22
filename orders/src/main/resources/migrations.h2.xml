@@ -8,7 +8,7 @@
 
 	<changeSet id="2" author="frankche88">
 
-		<sqlFile dbms="mysql" encoding="utf8" endDelimiter=";"
+		<sqlFile dbms="h2" encoding="utf8" endDelimiter=";"
 			path="migrations/h2/2_OrdersTable.sql"
 			relativeToChangelogFile="true" splitStatements="true"
 			stripComments="true" />
@@ -17,7 +17,7 @@
 
 	<changeSet id="3" author="frankche88">
 
-		<sqlFile dbms="mysql" encoding="utf8" endDelimiter=";"
+		<sqlFile dbms="h2" encoding="utf8" endDelimiter=";"
 			path="migrations/h2/4_OrderItemsTable.sql"
 			relativeToChangelogFile="true" splitStatements="true"
 			stripComments="true" />

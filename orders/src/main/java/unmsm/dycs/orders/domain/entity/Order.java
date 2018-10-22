@@ -7,6 +7,7 @@ import java.util.Set;
 public class Order {
 
 	private Long id;
+	private Long buyerid;
 	private String firstName;
 	private String lastName;
 	private String address;
@@ -78,6 +79,14 @@ public class Order {
 
 	public void setOrderItems(Set<OrderItem> orderItems) {
 		this.orderItems = orderItems;
+	}
+
+	public Long getBuyerid() {
+		return buyerid;
+	}
+
+	public void setBuyerid(Long buyerid) {
+		this.buyerid = buyerid;
 	}
 
 }

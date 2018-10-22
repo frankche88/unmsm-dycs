@@ -15,7 +15,9 @@ swagger:
   resourcePackage: unmsm.dycs.orders.application.controllers 
   schemes:
     - http
-
+amqp:
+  mqUrl: ${AMQ_URL}
+  queue: ${AMQ_QUEUE}
 database:
   # the username
   user: ${DB_USERNAME}
@@ -40,9 +42,10 @@ database:
   # the timeout before a connection validation queries fail
   validationQueryTimeout: 3s
   # the minimum number of connections to keep open
-  minSize: 8
+  minSize: 2
+  initialSize: 2
   # the maximum number of connections to keep open
-  maxSize: 32
+  maxSize: 5
   # whether or not idle connections should be validated
   checkConnectionWhileIdle: false
   # the amount of time to sleep between runs of the idle connection validation, abandoned cleaner and idle pool resizing

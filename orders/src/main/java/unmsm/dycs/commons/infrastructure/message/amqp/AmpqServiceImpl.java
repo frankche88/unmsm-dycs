@@ -11,10 +11,11 @@ import com.rabbitmq.client.Channel;
 import com.rabbitmq.client.Connection;
 import com.rabbitmq.client.ConnectionFactory;
 
-public class AmpqServiceImpl {
+import unmsm.dycs.commons.infrastructure.message.MessageService;
+
+public class AmpqServiceImpl implements MessageService {
 
 	private final AMQPConfiguration amqpConfig;
-	
 
 	@Inject
 	public AmpqServiceImpl(AMQPConfiguration amqpConfiguration) {
@@ -23,6 +24,10 @@ public class AmpqServiceImpl {
 
 	}
 
+	/* (non-Javadoc)
+	 * @see unmsm.dycs.commons.infrastructure.message.amqp.MessageService#publish(unmsm.dycs.commons.infrastructure.message.amqp.AmpqServiceImpl.OrderCompletedEvent)
+	 */
+	@Override
 	public void publish(OrderCompletedEvent event) {
 
 		ConnectionFactory factory = null;
@@ -38,35 +43,35 @@ public class AmpqServiceImpl {
 			connection = factory.newConnection();
 			channel = connection.createChannel();
 		} catch (IOException e) {
-			throw new IllegalArgumentException("URL de conexion no valida");
+			throw new IllegalArgumentException("URL de conexion no valida", e);
 		}
 
 		try {
-			channel.queueDeclare(amqpConfig.getQueue(), false, false, false, null);
+			channel.queueDeclare(amqpConfig.getQueue(), true, false, false, null);
 		} catch (IOException e) {
-			throw new IllegalArgumentException("No se pudo acceder a la cola:" + amqpConfig.getQueue());
+			throw new IllegalArgumentException("No se pudo acceder a la cola:" + amqpConfig.getQueue(), e);
 		}
 
 		try {
 			channel.basicPublish("", amqpConfig.getQueue(), null, event.toString().getBytes());
 		} catch (IOException e) {
-			throw new IllegalArgumentException("No se pudo publicar el mensaje:" + event.toString());
+			throw new IllegalArgumentException("No se pudo publicar el mensaje:" + event.toString(), e);
 		}
 
 	}
 
 	public static class OrderCompletedEvent {
-		public OrderCompletedEvent(String buyerId) {
+		public OrderCompletedEvent(Long buyerId) {
 			this.buyerId = buyerId;
 		}
 
-		public String buyerId;
+		public Long buyerId;
 
-		public String getBuyerId() {
+		public Long getBuyerId() {
 			return buyerId;
 		}
 
-		public void setBuyerId(String buyerId) {
+		public void setBuyerId(Long buyerId) {
 			this.buyerId = buyerId;
 		}
 

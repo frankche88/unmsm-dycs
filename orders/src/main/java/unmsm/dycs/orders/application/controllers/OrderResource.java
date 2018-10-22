@@ -14,6 +14,7 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.MediaType;
 
+import io.dropwizard.auth.Auth;
 import io.dropwizard.hibernate.UnitOfWork;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiKeyAuthDefinition;
@@ -21,6 +22,7 @@ import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.Authorization;
 import io.swagger.annotations.SecurityDefinition;
 import io.swagger.annotations.SwaggerDefinition;
+import unmsm.dycs.application.security.client.ApplicationUser;
 import unmsm.dycs.orders.application.OrderService;
 import unmsm.dycs.orders.application.assembler.OrderAssembler;
 import unmsm.dycs.orders.application.dto.OrderHeaderOutputDto;
@@ -60,10 +62,12 @@ public class OrderResource {
     @UnitOfWork
     @ApiOperation(value = "Add order", notes = "Agregate new Order", authorizations = {
             @Authorization(value = "Bearer") })
-    public Order create(@Valid OrderInputDto orderDto) {
+    public Order create(@Auth ApplicationUser user, @Valid OrderInputDto orderDto) {
+    	//user.
 
         Order order = orderAssembler.toEntity(orderDto);
 
+        order.setBuyerid(user.getId());
         return orderService.create(order);
     }
 
@@ -72,7 +76,7 @@ public class OrderResource {
     @UnitOfWork
     @ApiOperation(value = "Remove order", notes = "Remove Order by id order", authorizations = {
             @Authorization(value = "Bearer") })
-    public void delete(@PathParam("id") Long id) {
+    public void delete(@Auth ApplicationUser user, @PathParam("id") Long id) {
         orderService.delete(id);
     }
 
@@ -81,7 +85,7 @@ public class OrderResource {
     @UnitOfWork
     @ApiOperation(value = "show order", notes = "Show Order by id order", authorizations = {
             @Authorization(value = "Bearer") })
-    public OrderOutputDto ordersList(@QueryParam("id") Long id) {
+    public OrderOutputDto ordersList(@Auth ApplicationUser user, @QueryParam("id") Long id) {
 
         Order order = orderService.orderById(id);
 
@@ -92,7 +96,9 @@ public class OrderResource {
     @UnitOfWork
     @ApiOperation(value = "List orders", notes = "List all orders", authorizations = {
             @Authorization(value = "Bearer") })
-    public List<OrderHeaderOutputDto> ordersList() {
+    public List<OrderHeaderOutputDto> ordersList(@Auth ApplicationUser user) {
+    	
+    	//TODO: listar por buyerid
 
         return orderAssembler.toHeaderDto(orderService.findAll());
 

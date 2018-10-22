@@ -9,19 +9,23 @@ import org.modelmapper.spi.MappingContext;
 import unmsm.dycs.commons.domain.enumeration.Currency;
 import unmsm.dycs.commons.domain.valueobject.Money;
 import unmsm.dycs.orders.application.dto.OrderItemInputDto;
-import unmsm.dycs.orders.application.dto.OrderItemOutputDto;
 import unmsm.dycs.orders.domain.entity.OrderItem;
 
 public class OrderItemMapper extends PropertyMap<OrderItemInputDto, OrderItem> {
 
-	final Converter<OrderItemOutputDto, Money> moneyConverter = new Converter<OrderItemOutputDto, Money>() {
+	final Converter<OrderItemInputDto, Money> moneyConverter = new Converter<OrderItemInputDto, Money>() {
 		
-		public Money convert(MappingContext<OrderItemOutputDto, Money> context) {
+		public Money convert(MappingContext<OrderItemInputDto, Money> context) {
 
 			if (context.getSource() != null || context.getSource().getUnitPrice() != null
 					|| context.getSource().getCurrency() != null) {
 
-				Currency currency = Currency.valueOf(context.getSource().getCurrency());
+				Currency currency = Currency.PEN;
+				try {
+					currency = Currency.valueOf(context.getSource().getCurrency());
+				} catch(IllegalArgumentException e) {
+					
+				}
 				
 				return new Money(context.getSource().getUnitPrice(), currency == null ? Currency.PEN : currency);
 

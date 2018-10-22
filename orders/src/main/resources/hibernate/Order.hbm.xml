@@ -11,6 +11,8 @@
 			<generator class="native" />
 		</id>
 
+		<property name="buyerid" column="buyer_id" />
+
 		<property name="firstName" column="first_name" />
 
 		<property name="lastName" column="last_name" />
