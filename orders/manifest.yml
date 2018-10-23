@@ -1,0 +1,6 @@
+instances: 1
+memory: 1024M
+applications:
+- name: orders-dycs
+  path: build/libs/service.jar
+command: echo "Starting banking-dropwizard." && $PWD/.java-buildpack/open_jdk_jre/bin/java -cp $PWD/*:. $JAVA_OPTS -Djava.io.tmpdir=$TMPDIR unmsm.dycs.App server $PWD/config.yaml
