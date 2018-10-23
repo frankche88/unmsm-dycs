@@ -100,7 +100,7 @@ public class OrderResource {
     	
     	//TODO: listar por buyerid
 
-        return orderAssembler.toHeaderDto(orderService.findAll());
+        return orderAssembler.toHeaderDto(orderService.findAllByBuyerid(user.getId()));
 
     }
 }

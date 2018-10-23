@@ -15,4 +15,6 @@ public interface OrderRepository {
 
 	List<Order> findAll();
 
+	List<Order> findAllByBuyerid(long buyerId);
+
 }

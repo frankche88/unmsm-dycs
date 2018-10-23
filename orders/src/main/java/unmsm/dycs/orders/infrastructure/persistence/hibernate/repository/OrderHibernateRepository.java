@@ -3,8 +3,10 @@ package unmsm.dycs.orders.infrastructure.persistence.hibernate.repository;
 import java.util.List;
 import java.util.Optional;
 
+import javax.persistence.TypedQuery;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.Predicate;
 import javax.persistence.criteria.Root;
 
 import unmsm.dycs.commons.infrastructure.persistence.hibernate.repository.BaseHibernateRepository;
@@ -47,6 +49,28 @@ public class OrderHibernateRepository extends BaseHibernateRepository<Order> imp
 		List<Order> orders = this.getSession().createQuery(criteria).getResultList();
 
 		return orders;
+	}
+
+	@Override
+	public List<Order> findAllByBuyerid(long buyerId) {
+		
+		
+		CriteriaBuilder criteriaBuilder = getSession().getCriteriaBuilder();
+        
+        CriteriaQuery<Order> criteriaQuery = criteriaBuilder.createQuery(Order.class);
+    
+        Root<Order> from = criteriaQuery.from(Order.class);
+    
+        CriteriaQuery<Order> select = criteriaQuery.select(from);
+    
+        Predicate condition = criteriaBuilder.equal(from.get("buyerid"), buyerId);
+    
+        TypedQuery<Order> typedQuery = getSession().createQuery(select.where(condition));
+		
+		
+		
+        return typedQuery.getResultList();
+		
 	}
 
 }

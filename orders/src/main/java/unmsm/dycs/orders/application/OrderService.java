@@ -56,9 +56,9 @@ public class OrderService {
         return repository.find(id).get();
     }
 
-    public List<Order> findAll() {
+    public List<Order> findAllByBuyerid(long buyerId) {
     	
-        return repository.findAll();
+        return repository.findAllByBuyerid(buyerId);
     }
 
     public void delete(Long id) {
