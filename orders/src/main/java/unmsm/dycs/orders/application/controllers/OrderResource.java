@@ -62,13 +62,18 @@ public class OrderResource {
     @UnitOfWork
     @ApiOperation(value = "Add order", notes = "Agregate new Order", authorizations = {
             @Authorization(value = "Bearer") })
-    public Order create(@Auth ApplicationUser user, @Valid OrderInputDto orderDto) {
+    public OrderOutputDto create(@Auth ApplicationUser user, @Valid OrderInputDto orderDto) {
     	//user.
 
         Order order = orderAssembler.toEntity(orderDto);
 
         order.setBuyerid(user.getId());
-        return orderService.create(order);
+        
+        order = orderService.create(order);
+        
+        OrderOutputDto dto = orderAssembler.toDto(order);
+        
+        return dto; 
     }
 
     @DELETE
