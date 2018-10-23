@@ -37,6 +37,6 @@ dependencies {
 }
 
 repositories {
-  maven { url "${sunatPUrepo}libs-release" }
+  jcenter()
   mavenCentral()
 }

@@ -19,6 +19,7 @@ import io.dropwizard.hibernate.UnitOfWork;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiKeyAuthDefinition;
 import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.ApiParam;
 import io.swagger.annotations.Authorization;
 import io.swagger.annotations.SecurityDefinition;
 import io.swagger.annotations.SwaggerDefinition;
@@ -62,7 +63,7 @@ public class OrderResource {
     @UnitOfWork
     @ApiOperation(value = "Add order", notes = "Agregate new Order", authorizations = {
             @Authorization(value = "Bearer") })
-    public OrderOutputDto create(@Auth ApplicationUser user, @Valid OrderInputDto orderDto) {
+    public OrderOutputDto create(@Valid OrderInputDto orderDto, @ApiParam(hidden=true)@Auth ApplicationUser user) {
     	//user.
 
         Order order = orderAssembler.toEntity(orderDto);
@@ -81,7 +82,7 @@ public class OrderResource {
     @UnitOfWork
     @ApiOperation(value = "Remove order", notes = "Remove Order by id order", authorizations = {
             @Authorization(value = "Bearer") })
-    public void delete(@Auth ApplicationUser user, @PathParam("id") Long id) {
+    public void delete(@ApiParam(hidden=true)@Auth ApplicationUser user, @ApiParam(value = "id order", required = true)@PathParam("id") Long id) {
         orderService.delete(id);
     }
 
@@ -90,7 +91,7 @@ public class OrderResource {
     @UnitOfWork
     @ApiOperation(value = "show order", notes = "Show Order by id order", authorizations = {
             @Authorization(value = "Bearer") })
-    public OrderOutputDto ordersList(@Auth ApplicationUser user, @QueryParam("id") Long id) {
+    public OrderOutputDto ordersList(@ApiParam(hidden=true)@Auth ApplicationUser user, @ApiParam(value = "id order", required = true)@QueryParam("id") Long id) {
 
         Order order = orderService.orderById(id);
 
@@ -101,7 +102,7 @@ public class OrderResource {
     @UnitOfWork
     @ApiOperation(value = "List orders", notes = "List all orders", authorizations = {
             @Authorization(value = "Bearer") })
-    public List<OrderHeaderOutputDto> ordersList(@Auth ApplicationUser user) {
+    public List<OrderHeaderOutputDto> ordersList(@ApiParam(hidden=true)@Auth ApplicationUser user) {
     	
     	//TODO: listar por buyerid
 

@@ -1,0 +1,20 @@
+export MYSQL_DRIVER=org.h2.Driver
+export MYSQL_HOST_PORT=jdbc:h2:../db/orders;MODE=MYSQL
+export MYSQL_USER=sa
+export MYSQL_USER_PASSWORD=sa
+
+
+export JDBC_URL=jdbc:h2:../db/orders;MODE=MYSQL
+
+export JDBC_DRIVER=org.h2.Driver
+
+export DB_USERNAME=sa
+export DB_PASSWORD=sa
+
+export AMQ_URL=amqp://bzizimsp:LKVNczGhhTNTsk-CxeLgdE7MAFt_8Nbq@chimpanzee.rmq.cloudamqp.com/bzizimsp
+export AMQ_QUEUE=order.procesed
+
+export JWT_ISSUER=https://shoppingcart.com
+export JWT_AUDIENCE=https://shoppingcart.com
+export JWT_TOKEN_KEY=SUPERPASSWORD123
+

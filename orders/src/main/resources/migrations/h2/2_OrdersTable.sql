@@ -11,4 +11,4 @@ CREATE TABLE orders (
 );
 
 INSERT INTO orders(buyer_id, first_name, last_name, address, credit_card, credit_card_authcode, order_date)
-VALUES(buyer_id, 'Pedro', 'Gomez', 'La casa de mama', '5464-5464-5464-5464', '464', '2018-10-01 00:00:00');
+VALUES(1, 'Pedro', 'Gomez', 'La casa de mama', '5464-5464-5464-5464', '464', '2018-10-01 00:00:00');
