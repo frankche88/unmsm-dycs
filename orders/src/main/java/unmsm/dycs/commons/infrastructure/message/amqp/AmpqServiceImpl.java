@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.net.URISyntaxException;
 import java.security.KeyManagementException;
 import java.security.NoSuchAlgorithmException;
+import java.util.concurrent.TimeoutException;
 
 import javax.inject.Inject;
 
@@ -44,6 +45,8 @@ public class AmpqServiceImpl implements MessageService {
 			channel = connection.createChannel();
 		} catch (IOException e) {
 			throw new IllegalArgumentException("URL de conexion no valida", e);
+		} catch (TimeoutException e) {
+			throw new IllegalArgumentException("Servicio no responde", e);
 		}
 
 		try {
