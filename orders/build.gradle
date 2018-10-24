@@ -28,11 +28,19 @@ run {
   //args += ['db', 'migrate', './src/main/resources/config.yaml']
 }
 
-task myRun(type: JavaExec) {
+task migrate (type: JavaExec) {
   classpath sourceSets.main.runtimeClasspath
   main = "unmsm.dycs.App"
   args "db", "migrate", './src/main/resources/config.yaml' 
 }
+
+task dumpdata (type: JavaExec) {
+  classpath sourceSets.main.runtimeClasspath
+  main = "unmsm.dycs.App"
+  args "db", "dump", '-o', './changeset.xml', '--data', './src/main/resources/config.yaml' 
+}
+
+//java -jar orders/build/libs/service.jar db dump -o ./changeset.xml --data  orders/src/main/resources/config.yaml
 
 
 shadowJar {

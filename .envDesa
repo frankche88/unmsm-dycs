@@ -4,7 +4,7 @@ export MYSQL_USER=sa
 export MYSQL_USER_PASSWORD=sa
 
 
-export JDBC_URL=jdbc:h2:../db/orders;MODE=MYSQL
+export JDBC_URL=jdbc:h2:./db/orders;MODE=MYSQL
 
 export JDBC_DRIVER=org.h2.Driver
 

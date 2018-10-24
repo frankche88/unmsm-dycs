@@ -1,5 +1,5 @@
 instances: 1
-memory: 512M
+memory: 256M
 applications:
 - name: orders-dycs
   path: build/libs/service.jar
