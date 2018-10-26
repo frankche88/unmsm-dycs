@@ -4,6 +4,8 @@ import java.util.Optional;
 
 import javax.inject.Inject;
 import javax.inject.Singleton;
+import javax.ws.rs.WebApplicationException;
+import javax.ws.rs.core.Response;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -11,6 +13,7 @@ import org.slf4j.LoggerFactory;
 import io.dropwizard.auth.AuthenticationException;
 import io.dropwizard.auth.Authenticator;
 import io.jsonwebtoken.Claims;
+import io.jsonwebtoken.ExpiredJwtException;
 import io.jsonwebtoken.Jws;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureException;
@@ -55,7 +58,15 @@ public class OAuthAuthenticator implements Authenticator<String, ApplicationUser
 
         } catch (SignatureException e) {
 
-            throw new AuthenticationException("Token not valid", e);
+            //throw new AuthenticationException("Token not valid", e);
+            
+            throw new WebApplicationException("Unable to parse credentials", Response.Status.UNAUTHORIZED);
+            
+        } catch (ExpiredJwtException e) {
+            
+            //throw new AuthenticationException("Token expired", e);
+            throw new WebApplicationException("Token expired", Response.Status.UNAUTHORIZED);
+            
         }
     }
 }
