@@ -6,8 +6,7 @@ import io.dropwizard.auth.Authorizer;
 import unmsm.dycs.application.security.client.ApplicationUser;
 
 @Singleton
-public class ApplicationAuthorizer implements Authorizer<ApplicationUser> {
-
+public class UserAuthorizer implements Authorizer<ApplicationUser> {
     @Override
     public boolean authorize(ApplicationUser user, String role) {
 
@@ -20,5 +19,4 @@ public class ApplicationAuthorizer implements Authorizer<ApplicationUser> {
 
         return user.getRoles().contains(role);
     }
-
 }

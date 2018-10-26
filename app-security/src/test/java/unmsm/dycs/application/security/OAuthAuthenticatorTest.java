@@ -1,15 +1,20 @@
 package unmsm.dycs.application.security;
 
+import java.io.UnsupportedEncodingException;
+import java.time.Instant;
+import java.util.Date;
+
 import org.junit.Assert;
 import org.junit.Test;
 
 import io.dropwizard.auth.AuthenticationException;
-import unmsm.dycs.application.security.OAuthDynamicFeature.OAuthAuthenticator;
+import io.jsonwebtoken.Jwts;
+import io.jsonwebtoken.SignatureAlgorithm;
 
 public class OAuthAuthenticatorTest {
     
     @Test
-    public void test() {
+    public void test() throws UnsupportedEncodingException {
         
         JwtOrderConfiguration jwtConfig = new JwtOrderConfiguration();
         
@@ -19,11 +24,13 @@ public class OAuthAuthenticatorTest {
         OAuthAuthenticator oAuthAuthenticator = new OAuthAuthenticator(jwtConfig);
         
         
-        String credentials = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1laWRlbnRpZmllciI6IjEiLCJ1c2VySWQiOiIxIiwic3ViIjoiYWRtaW4iLCJqdGkiOiIwNDNiNWEzMC02ZTRiLTQ3NDctODgzOS0wNjRmZTViZGE5ODUiLCJlbWFpbCI6ImFkbWluQGhlbnJ5Z3VzdGF2by5jb20iLCJyb2xlIjoiYWRtaW4iLCJodHRwOi8vc2NoZW1hcy5taWNyb3NvZnQuY29tL3dzLzIwMDgvMDYvaWRlbnRpdHkvY2xhaW1zL3JvbGUiOiJBZG1pbiIsImV4cCI6MTUzOTMwNjY4MiwiaXNzIjoiaHR0cHM6Ly9zaG9wcGluZ2NhcnQuY29tIiwiYXVkIjoiaHR0cHM6Ly9zaG9wcGluZ2NhcnQuY29tIn0.OrqUMcE05E97aWlvWPgzWuiAX8DgDpTtgU-MLcxy-ek";
+        String credentials = createToken();
+        
+        System.out.println("OAuthAuthenticatorTest.test()" + credentials);
+        
         try {
             oAuthAuthenticator.authenticate(credentials );
         } catch (AuthenticationException e) {
-            // TODO Auto-generated catch block
             e.printStackTrace();
             Assert.fail(e.getLocalizedMessage());
         } catch (Exception e) {
@@ -33,5 +40,31 @@ public class OAuthAuthenticatorTest {
         }
         
     }
+    
+    public String createToken() throws UnsupportedEncodingException {
+        
+        //long now = Instant.now(); //.getEpochSecond();
+        
+        String s = Jwts.builder()
+                .setSubject("admin")
+                .setId("043b5a30-6e4b-4747-8839-064fe5bda985")
+                .setExpiration(Date.from(Instant.now().plusSeconds(60 * 60 * 24 )))
+                .setIssuer("https://shoppingcart.com")
+                .setAudience("https://shoppingcart.com")
+                .setIssuedAt(Date.from(Instant.now()))
+                .claim("http://schemas.xmlsoap.org/ws/2005/05/identity/claims/nameidentifier", "1")
+                .claim("userId", "1")
+                .claim("email", "admin@henrygustavo.com")
+                .claim("role", "admin")
+                .claim("http://schemas.microsoft.com/ws/2008/06/identity/claims/role", "Admin")
+                .claim("iss", "https://shoppingcart.com")
+                .claim("aud", "https://shoppingcart.com")
+                .signWith(SignatureAlgorithm.HS256, "SUPERPASSWORD123".getBytes("UTF-8"))
+                .compact();
+        
+        return s;
+    }
+    
+    
 
 }

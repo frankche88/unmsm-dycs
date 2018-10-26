@@ -37,8 +37,8 @@ public class OrderAssembler {
 
 	public OrderOutputDto toDto(Order Order) {
 		ModelMapper _mapper = new ModelMapper();
-		_mapper.addMappings(new OrderHeaderOutputDtoMapper());
-		_mapper.addMappings(new OrderItemOutputDtoMapper());
+        _mapper.addMappings(new OrderItemOutputDtoMapper());
+		_mapper.addMappings(new OrderOutputDtoMapper());
 		
 		
 		return _mapper.map(Order, OrderOutputDto.class);

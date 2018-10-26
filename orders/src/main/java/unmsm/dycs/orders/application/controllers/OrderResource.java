@@ -33,7 +33,7 @@ import unmsm.dycs.orders.domain.entity.Order;
 
 @SwaggerDefinition(securityDefinition = @SecurityDefinition(
         apiKeyAuthDefinitions = {
-                @ApiKeyAuthDefinition(key = "Bearer", in = ApiKeyAuthDefinition.ApiKeyLocation.HEADER, name = "Bearer") 
+                @ApiKeyAuthDefinition(key = "Authorization", in = ApiKeyAuthDefinition.ApiKeyLocation.HEADER, name = "Authorization") 
                 }
 //        ,
 //        oAuth2Definitions = {
@@ -61,8 +61,9 @@ public class OrderResource {
 
     @POST
     @UnitOfWork
+    @RolesAllowed({"admin", "member"})
     @ApiOperation(value = "Add order", notes = "Agregate new Order", authorizations = {
-            @Authorization(value = "Bearer") })
+            @Authorization(value = "Authorization") })
     public OrderOutputDto create(@Valid OrderInputDto orderDto, @ApiParam(hidden=true)@Auth ApplicationUser user) {
     	//user.
 
@@ -81,7 +82,7 @@ public class OrderResource {
     @Path("/{id}")
     @UnitOfWork
     @ApiOperation(value = "Remove order", notes = "Remove Order by id order", authorizations = {
-            @Authorization(value = "Bearer") })
+            @Authorization(value = "Authorization") })
     public void delete(@ApiParam(hidden=true)@Auth ApplicationUser user, @ApiParam(value = "id order", required = true)@PathParam("id") Long id) {
         orderService.delete(id);
     }
@@ -90,7 +91,7 @@ public class OrderResource {
     @Path("/{id}")
     @UnitOfWork
     @ApiOperation(value = "show order", notes = "Show Order by id order", authorizations = {
-            @Authorization(value = "Bearer") })
+            @Authorization(value = "Authorization") })
     public OrderOutputDto ordersList(@ApiParam(hidden=true)@Auth ApplicationUser user, @ApiParam(value = "id order", required = true)@QueryParam("id") Long id) {
 
         Order order = orderService.orderById(id);
@@ -101,7 +102,7 @@ public class OrderResource {
     @GET
     @UnitOfWork
     @ApiOperation(value = "List orders", notes = "List all orders", authorizations = {
-            @Authorization(value = "Bearer") })
+            @Authorization(value = "Authorization") })
     public List<OrderHeaderOutputDto> ordersList(@ApiParam(hidden=true)@Auth ApplicationUser user) {
     	
     	//TODO: listar por buyerid

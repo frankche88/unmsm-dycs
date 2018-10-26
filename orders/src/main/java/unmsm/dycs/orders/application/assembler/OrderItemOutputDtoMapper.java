@@ -22,6 +22,17 @@ public class OrderItemOutputDtoMapper extends PropertyMap<OrderItem, OrderItemOu
 
 		}
 	};
+	
+	final Converter<OrderItem, BigDecimal> unitPriceConverter = new Converter<OrderItem, BigDecimal>() {
+        public BigDecimal convert(MappingContext<OrderItem, BigDecimal> context) {
+
+            BigDecimal unitPrice = context.getSource().getUnitPrice().getAmount();
+
+            return unitPrice;
+
+        }
+    };
+	
 
 	final Converter<OrderItem, String> currencyConverter = new Converter<OrderItem, String>() {
 		public String convert(MappingContext<OrderItem, String> context) {
@@ -41,6 +52,7 @@ public class OrderItemOutputDtoMapper extends PropertyMap<OrderItem, OrderItemOu
 	@Override
 	protected void configure() {
 
+	    using(unitPriceConverter).map(source).setUnitPrice(null);
 		using(totalConverter).map(source).setTotal(null);
 		//map().setCurrency(source.getUnitPrice().getCurrency().name());
 		using(currencyConverter).map(source).setCurrency(null);
