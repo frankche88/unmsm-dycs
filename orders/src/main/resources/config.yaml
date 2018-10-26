@@ -36,18 +36,19 @@ database:
     hibernate.generate_statistics: false
     hibernate.hbm2ddl.auto: validate
   # the maximum amount of time to wait on an empty pool before throwing an exception
-  maxWaitForConnection: 10s
+  maxWaitForConnection: 1s
   # the SQL query to run when validating a connection's liveness
   validationQuery: "/* MyService Health Check */ SELECT 1"
   # the timeout before a connection validation queries fail
-  validationQueryTimeout: 10s
+  validationQueryTimeout: 3s
   # the minimum number of connections to keep open
   minSize: 2
   initialSize: 2
   # the maximum number of connections to keep open
   maxSize: 4
   # whether or not idle connections should be validated
-  checkConnectionWhileIdle: false
+  checkConnectionWhileIdle: true
+  checkConnectionOnBorrow: true
   # the amount of time to sleep between runs of the idle connection validation, abandoned cleaner and idle pool resizing
   evictionInterval: 10s
   # the minimum amount of time an connection must sit idle in the pool before it is eligible for eviction
