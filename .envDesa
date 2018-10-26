@@ -3,6 +3,10 @@ export MYSQL_HOST_PORT=jdbc:h2:../db/orders;MODE=MYSQL
 export MYSQL_USER=sa
 export MYSQL_USER_PASSWORD=sa
 
+export PORT=8001
+
+export ADMINPORT=8101
+
 
 export JDBC_URL=jdbc:h2:./db/orders;MODE=MYSQL
 
