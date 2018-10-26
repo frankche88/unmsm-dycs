@@ -1,0 +1,15 @@
+export JDBC_URL=jdbc:postgresql://baasu-01.db.elephantsql.com:5432/mcmpymrv
+export JDBC_DRIVER=org.postgresql.Driver
+
+export PORT=9000
+export ADMINPORT=9000
+export DB_USERNAME=mcmpymrv
+export DB_PASSWORD=dlwCDeNPW-CrvR_B0P-FmE7t0kCipI95
+
+export JWT_ISSUER=https://shoppingcart.com
+export JWT_AUDIENCE=https://shoppingcart.com
+export JWT_TOKEN_KEY=SUPERPASSWORD123
+
+export AMQ_URL=amqp://bzizimsp:LKVNczGhhTNTsk-CxeLgdE7MAFt_8Nbq@chimpanzee.rmq.cloudamqp.com/bzizimsp
+export AMQ_QUEUE=order.procesed
+

@@ -6,7 +6,25 @@
 	xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
          http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.0.xsd">
 
-	<changeSet id="2" author="frankche88">
+    <changeSet id="1" author="frankche88">
+
+        <sqlFile dbms="PostgreSQL" encoding="utf8" endDelimiter=";"
+            path="migrations/postgres/2_OrdersTable.sql"
+            relativeToChangelogFile="true" splitStatements="true"
+            stripComments="true" />
+
+    </changeSet>
+
+    <changeSet id="2" author="frankche88">
+
+        <sqlFile dbms="PostgreSQL" encoding="utf8" endDelimiter=";"
+            path="migrations/postgres/4_OrderItemsTable.sql"
+            relativeToChangelogFile="true" splitStatements="true"
+            stripComments="true" />
+
+    </changeSet>
+
+	<changeSet id="3" author="frankche88">
 
 		<sqlFile dbms="mysql" encoding="utf8" endDelimiter=";"
 			path="migrations/h2/2_OrdersTable.sql"
@@ -15,7 +33,7 @@
 
 	</changeSet>
 
-	<changeSet id="3" author="frankche88">
+	<changeSet id="4" author="frankche88">
 
 		<sqlFile dbms="mysql" encoding="utf8" endDelimiter=";"
 			path="migrations/h2/4_OrderItemsTable.sql"
@@ -24,7 +42,7 @@
 
 	</changeSet>
 	
-	   <changeSet id="4" author="frankche88">
+	   <changeSet id="5" author="frankche88">
 
         <sqlFile dbms="h2" encoding="utf8" endDelimiter=";"
             path="migrations/h2/2_OrdersTable.sql"
@@ -33,7 +51,7 @@
 
     </changeSet>
 
-    <changeSet id="5" author="frankche88">
+    <changeSet id="6" author="frankche88">
 
         <sqlFile dbms="h2" encoding="utf8" endDelimiter=";"
             path="migrations/h2/4_OrderItemsTable.sql"

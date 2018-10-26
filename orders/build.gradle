@@ -1,10 +1,10 @@
 buildscript {
   repositories {
-    jcenter()
+    maven { url "${sunatPUrepo}libs-release" }
     mavenCentral()
   }
   dependencies {
-    classpath 'com.github.jengelman.gradle.plugins:shadow:2.0.3'
+    classpath 'com.github.jengelman.gradle.plugins:shadow:1.2.4'
     classpath 'com.bmuschko:gradle-docker-plugin:3.0.7'
   }
 }
@@ -91,6 +91,8 @@ dependencies {
     
   compile group: 'com.h2database', name: 'h2', version: '1.4.197'
   
+  compile group: 'org.postgresql', name: 'postgresql', version: '42.2.5'
+  
   compile 'com.rabbitmq:amqp-client:5.4.3'
 
   compile project(':app-security')
@@ -100,7 +102,7 @@ dependencies {
 }
 
 repositories {
-  jcenter()
+ jcenter()
   mavenCentral()
 }
 
