@@ -79,7 +79,7 @@ public class AmpqServiceImpl implements MessageService {
 		}
 
 		public String toString() {
-			return "{\"buyerId\": \"" + buyerId + "\"}";
+			return "" + buyerId;
 		}
 	}
 
