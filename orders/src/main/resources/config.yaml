@@ -1,9 +1,9 @@
 server:
   applicationConnectors:
-  - type: http
+  - type: ${HTTP_TYPE}
     port: ${PORT}
   adminConnectors:
-  - type: http
+  - type: ${HTTP_TYPE}
     port: ${ADMINPORT}
 #JWT
 jwt:
