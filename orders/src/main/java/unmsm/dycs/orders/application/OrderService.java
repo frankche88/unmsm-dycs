@@ -47,7 +47,7 @@ public class OrderService {
         }
     	
     	
-    	messageService.publish(new OrderCompletedEvent(order.getId()) );
+    	messageService.publish(new OrderCompletedEvent(order.getBuyerid()) );
         
         return retOrder;
     }
