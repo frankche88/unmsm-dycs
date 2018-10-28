@@ -1,17 +1,8 @@
-export MYSQL_DRIVER=org.h2.Driver
-export MYSQL_HOST_PORT=jdbc:h2:../db/orders;MODE=MYSQL
-export MYSQL_USER=sa
-export MYSQL_USER_PASSWORD=sa
-
-export PORT=8001
-
-export ADMINPORT=8101
-
-
-export JDBC_URL=jdbc:h2:./db/orders;MODE=MYSQL
-
+export JDBC_URL=jdbc:h2:./db/order;MODE=MYSQL
 export JDBC_DRIVER=org.h2.Driver
 
+export PORT=9000
+export ADMINPORT=9001
 export DB_USERNAME=sa
 export DB_PASSWORD=sa
 

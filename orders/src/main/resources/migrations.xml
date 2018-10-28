@@ -60,5 +60,14 @@
 
     </changeSet>
 
+    <changeSet id="7" author="frankche88">
+            
+       <modifyDataType
+            columnName="picture_url"
+            newDataType="varchar(300)"
+            tableName="order_items"/>
+
+    </changeSet>
+
 
 </databaseChangeLog>
