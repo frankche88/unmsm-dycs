@@ -38,7 +38,9 @@ import unmsm.dycs.orders.application.dto.OrderInputDto;
 import unmsm.dycs.orders.application.dto.OrderOutputDto;
 import unmsm.dycs.orders.domain.entity.Order;
 
-@SwaggerDefinition(securityDefinition = @SecurityDefinition(apiKeyAuthDefinitions = {
+@SwaggerDefinition(schemes = {SwaggerDefinition.Scheme.HTTPS
+        , SwaggerDefinition.Scheme.HTTP
+        }, securityDefinition = @SecurityDefinition(apiKeyAuthDefinitions = {
         @ApiKeyAuthDefinition(key = "Authorization", in = ApiKeyAuthDefinition.ApiKeyLocation.HEADER, name = "Authorization") }
 //        ,
 //        oAuth2Definitions = {

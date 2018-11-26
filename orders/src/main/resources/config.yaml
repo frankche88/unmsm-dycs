@@ -1,3 +1,10 @@
+server:
+  applicationConnectors:
+  - type: http
+    port: ${PORT}
+  adminConnectors:
+  - type: http
+    port: ${ADMINPORT}
 #JWT
 jwt:
   tokenKey: ${JWT_TOKEN_KEY}

@@ -52,6 +52,7 @@ public class OrderService {
     	rabbitMessageService.publish(event);
     	
     	firebaseMessageService.publish(event);
+
         
         return retOrder;
     }

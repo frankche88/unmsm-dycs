@@ -27,7 +27,7 @@
 		<property name="orderDate" column="order_date" />
 
 		<set name="orderItems" table="order_items" inverse="true"
-			lazy="true" fetch="select" cascade="save-update, delete">
+			lazy="true" fetch="select" cascade="delete">
 
 			<key>
 				<column name="order_id" not-null="true" />
