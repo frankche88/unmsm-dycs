@@ -47,11 +47,9 @@ public class OrderService {
             
         }
     	
-    	OrderCompletedEvent event = new OrderCompletedEvent(order.getId());
+    	rabbitMessageService.publish(new OrderCompletedEvent(order.getBuyerid()));
     	
-    	rabbitMessageService.publish(event);
-    	
-    	firebaseMessageService.publish(event);
+    	firebaseMessageService.publish(new OrderCompletedEvent(order.getId()));
 
         
         return retOrder;
