@@ -13,83 +13,68 @@ import com.rabbitmq.client.Connection;
 import com.rabbitmq.client.ConnectionFactory;
 
 import unmsm.dycs.commons.infrastructure.message.MessageService;
+import unmsm.dycs.commons.infrastructure.message.OrderCompletedEvent;
 
 public class AmpqServiceImpl implements MessageService {
 
-	private final AMQPConfiguration amqpConfig;
+    private final AMQPConfiguration amqpConfig;
 
-	@Inject
-	public AmpqServiceImpl(AMQPConfiguration amqpConfiguration) {
+    @Inject
+    public AmpqServiceImpl(AMQPConfiguration amqpConfiguration) {
 
-		this.amqpConfig = amqpConfiguration;
+        this.amqpConfig = amqpConfiguration;
 
-	}
+    }
 
-	/* (non-Javadoc)
-	 * @see unmsm.dycs.commons.infrastructure.message.amqp.MessageService#publish(unmsm.dycs.commons.infrastructure.message.amqp.AmpqServiceImpl.OrderCompletedEvent)
-	 */
-	@Override
-	public void publish(OrderCompletedEvent event) {
+    /*
+     * (non-Javadoc)
+     * 
+     * @see
+     * unmsm.dycs.commons.infrastructure.message.amqp.MessageService#publish(unmsm.
+     * dycs.commons.infrastructure.message.amqp.AmpqServiceImpl.OrderCompletedEvent)
+     */
+    @Override
+    public void publish(OrderCompletedEvent event) {
 
-		ConnectionFactory factory = null;
-		try {
-			factory = createConnectionFactory(amqpConfig);
-		} catch (KeyManagementException | NoSuchAlgorithmException | IOException | URISyntaxException e) {
-			throw new IllegalArgumentException("URL de conexion no valida");
-		}
+        ConnectionFactory factory = null;
+        try {
+            factory = createConnectionFactory(amqpConfig);
+        } catch (KeyManagementException | NoSuchAlgorithmException | IOException | URISyntaxException e) {
+            throw new IllegalArgumentException("URL de conexion no valida");
+        }
 
-		Connection connection;
-		final Channel channel;
-		try {
-			connection = factory.newConnection();
-			channel = connection.createChannel();
-		} catch (IOException e) {
-			throw new IllegalArgumentException("URL de conexion no valida", e);
-		} catch (TimeoutException e) {
-			throw new IllegalArgumentException("Servicio no responde", e);
-		}
+        Connection connection;
+        final Channel channel;
+        try {
+            connection = factory.newConnection();
+            channel = connection.createChannel();
+        } catch (IOException e) {
+            throw new IllegalArgumentException("URL de conexion no valida", e);
+        } catch (TimeoutException e) {
+            throw new IllegalArgumentException("Servicio no responde", e);
+        }
 
-		try {
-			channel.queueDeclare(amqpConfig.getQueue(), true, false, false, null);
-		} catch (IOException e) {
-			throw new IllegalArgumentException("No se pudo acceder a la cola:" + amqpConfig.getQueue(), e);
-		}
+        try {
+            channel.queueDeclare(amqpConfig.getQueue(), true, false, false, null);
+        } catch (IOException e) {
+            throw new IllegalArgumentException("No se pudo acceder a la cola:" + amqpConfig.getQueue(), e);
+        }
 
-		try {
-			channel.basicPublish("", amqpConfig.getQueue(), null, event.toString().getBytes());
-		} catch (IOException e) {
-			throw new IllegalArgumentException("No se pudo publicar el mensaje:" + event.toString(), e);
-		}
+        try {
+            channel.basicPublish("", amqpConfig.getQueue(), null, event.toString().getBytes());
+        } catch (IOException e) {
+            throw new IllegalArgumentException("No se pudo publicar el mensaje:" + event.toString(), e);
+        }
 
-	}
+    }
 
-	public static class OrderCompletedEvent {
-		public OrderCompletedEvent(Long buyerId) {
-			this.buyerId = buyerId;
-		}
+    private ConnectionFactory createConnectionFactory(AMQPConfiguration amqpConfig)
+            throws IOException, KeyManagementException, NoSuchAlgorithmException, URISyntaxException {
+        ConnectionFactory factory = new ConnectionFactory();
 
-		public Long buyerId;
+        factory.setUri(amqpConfig.getMqUrl());
 
-		public Long getBuyerId() {
-			return buyerId;
-		}
-
-		public void setBuyerId(Long buyerId) {
-			this.buyerId = buyerId;
-		}
-
-		public String toString() {
-			return "{\"buyerId\": \"" + buyerId + "\"}";
-		}
-	}
-
-	private ConnectionFactory createConnectionFactory(AMQPConfiguration amqpConfig)
-			throws IOException, KeyManagementException, NoSuchAlgorithmException, URISyntaxException {
-		ConnectionFactory factory = new ConnectionFactory();
-
-		factory.setUri(amqpConfig.getMqUrl());
-
-		return factory;
-	}
+        return factory;
+    }
 
 }

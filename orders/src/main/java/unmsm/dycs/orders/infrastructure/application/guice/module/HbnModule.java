@@ -6,12 +6,15 @@ import org.hibernate.SessionFactory;
 
 import com.google.inject.AbstractModule;
 import com.google.inject.Provides;
+import com.google.inject.name.Names;
 
 import unmsm.dycs.AppConfiguration;
 import unmsm.dycs.application.security.JwtOrderConfiguration;
 import unmsm.dycs.commons.infrastructure.message.MessageService;
 import unmsm.dycs.commons.infrastructure.message.amqp.AMQPConfiguration;
 import unmsm.dycs.commons.infrastructure.message.amqp.AmpqServiceImpl;
+import unmsm.dycs.commons.infrastructure.message.firebase.FirebaseConfiguration;
+import unmsm.dycs.commons.infrastructure.message.firebase.FirebaseServiceImpl;
 import unmsm.dycs.orders.domain.repository.OrderItemRepository;
 import unmsm.dycs.orders.domain.repository.OrderRepository;
 import unmsm.dycs.orders.infrastructure.application.bundles.HbnBundle;
@@ -35,7 +38,8 @@ public class HbnModule extends AbstractModule {
 		
 		bind(OrderItemRepository.class).to(OrderItemHibernateRepository.class);
 		
-		bind(MessageService.class).to(AmpqServiceImpl.class);
+		bind(MessageService.class).annotatedWith(Names.named("rabbit")).to(AmpqServiceImpl.class);
+		bind(MessageService.class).annotatedWith(Names.named("firebase")).to(FirebaseServiceImpl.class);
 
 	}
 
@@ -50,4 +54,11 @@ public class HbnModule extends AbstractModule {
 		return configuration.getAMQPConfiguration();
 		
 	}
+
+        @Provides
+        public FirebaseConfiguration getFirebaseConfiguration(AppConfiguration configuration) throws IOException {
+                
+                return configuration.getFirebaseConfiguration();
+                
+        }
 }

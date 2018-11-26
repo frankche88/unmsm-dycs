@@ -4,10 +4,11 @@ import java.util.List;
 import java.util.Optional;
 
 import javax.inject.Inject;
+import javax.inject.Named;
 
 import unmsm.dycs.commons.application.Notification;
 import unmsm.dycs.commons.infrastructure.message.MessageService;
-import unmsm.dycs.commons.infrastructure.message.amqp.AmpqServiceImpl.OrderCompletedEvent;
+import unmsm.dycs.commons.infrastructure.message.OrderCompletedEvent;
 import unmsm.dycs.orders.domain.entity.Order;
 import unmsm.dycs.orders.domain.entity.OrderItem;
 import unmsm.dycs.orders.domain.repository.OrderItemRepository;
@@ -17,13 +18,15 @@ public class OrderService {
 
     private final OrderRepository repository;
     private final OrderItemRepository itemRepository;
-    private final MessageService messageService;
+    private final MessageService rabbitMessageService;
+    private final MessageService firebaseMessageService;
     
     @Inject
-    public OrderService(MessageService messageService, OrderRepository repository, OrderItemRepository itemRepository) {
+    public OrderService(@Named("rabbit")MessageService rabbitService, @Named("firebase")MessageService firebaseService, OrderRepository repository, OrderItemRepository itemRepository) {
         this.repository = repository;
         this.itemRepository = itemRepository;
-        this.messageService = messageService;
+        this.rabbitMessageService = rabbitService;
+        this.firebaseMessageService = firebaseService;
     }
 
     public Order create(Order order) {
@@ -33,8 +36,6 @@ public class OrderService {
     	if(notification.hasErrors()) {
     		throw new IllegalArgumentException(notification.errorMessage());
     	}
-    	
-    	
     	
     	Order retOrder = repository.create(order);
     	
@@ -46,8 +47,11 @@ public class OrderService {
             
         }
     	
+    	OrderCompletedEvent event = new OrderCompletedEvent(order.getId());
     	
-    	messageService.publish(new OrderCompletedEvent(order.getId()) );
+    	rabbitMessageService.publish(event);
+    	
+    	firebaseMessageService.publish(event);
         
         return retOrder;
     }
