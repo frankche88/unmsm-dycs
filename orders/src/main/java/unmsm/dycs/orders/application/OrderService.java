@@ -57,6 +57,53 @@ public class OrderService {
     }
 
     private Notification validate(Order order) {
+    	
+    	
+    	/**
+    	 * 
+    	 this.validationMessages = {
+      firstName: {
+        required: 'Fist Name is required.',
+        minlength: 'Fist Name must be at least 2 characters.'
+      },
+      lastName: {
+        required: 'Last Name is required.',
+        minlength: 'Last Name must be at least 2 characters.'
+      },
+      address: {
+        required: 'Address is required.',
+        minlength: 'Address must be at least 2 characters.'
+      },
+      creditCardNumber: {
+        required: 'Credit Card Number is required.',
+        digits: 'Please enter a valid Credit Card Number.',
+        rangeLength: 'Credit Card Number must have 16 numbers.'
+      },
+      creditCardAuthCode: {
+        required: 'Credit Card Auth Code is required.',
+        digits: 'Please enter a valid Credit Card Auth Code.',
+        rangeLength: 'Credit Card Auth Code must have 3 numbers.'
+      }
+    };
+    
+    
+    
+      this.mainForm = this.fb.group({
+      firstName: new FormControl('', [Validators.required, Validators.minLength(2)]),
+      lastName: new FormControl('', [Validators.required, Validators.minLength(2)]),
+      address: new FormControl('', [Validators.required, Validators.minLength(2)]),
+      creditCardNumber: new FormControl('', [Validators.required, CustomValidators.digits, CustomValidators.rangeLength([16, 16])]),
+      creditCardAuthCode: new FormControl('', [Validators.required, CustomValidators.digits, CustomValidators.rangeLength([3, 3])])
+    });
+    
+    
+    	 * 
+    	 */
+    	
+    	
+    	
+    	
+    	
     	Notification notification = new Notification();
     	if(order.getBuyerid() == null) {
     		notification.addError("Buyer not be null");

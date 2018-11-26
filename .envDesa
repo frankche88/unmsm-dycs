@@ -22,3 +22,5 @@ export JWT_ISSUER=https://shoppingcart.com
 export JWT_AUDIENCE=https://shoppingcart.com
 export JWT_TOKEN_KEY=SUPERPASSWORD123
 
+export HTTP_TYPE=http
+
