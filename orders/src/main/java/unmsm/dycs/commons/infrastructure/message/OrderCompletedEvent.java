@@ -17,7 +17,7 @@ public class OrderCompletedEvent {
     }
 
     public String toString() {
-        return "{\"buyerId\": \"" + buyerId + "\"}";
+        return "\"" + buyerId + "\"";
     }
 
 }
