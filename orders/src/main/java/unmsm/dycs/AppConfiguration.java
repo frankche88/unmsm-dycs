@@ -25,7 +25,7 @@ public class AppConfiguration extends Configuration {
     
     @Valid
     @NotNull
-    @JsonProperty("amqp")
+    @JsonProperty("firebase")
     private FirebaseConfiguration firebase = new FirebaseConfiguration();
 
     @JsonProperty("swagger")
